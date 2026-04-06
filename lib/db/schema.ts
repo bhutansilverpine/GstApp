@@ -11,6 +11,7 @@ import {
   pgEnum,
   index,
   primaryKey,
+  jsonb,
 } from "drizzle-orm/pg-core";
 
 // Enums
@@ -60,7 +61,7 @@ export const organizations = pgTable(
     gstRate: decimal("gst_rate", { precision: 5, scale: 2 }).default("15"),
     fiscalYearEnd: varchar("fiscal_year_end", { length: 20 }).default("03-31"),
     logo: text("logo"),
-    settings: text("settings").$type<{
+    settings: jsonb("settings").$type<{
       currency?: string;
       dateFormat?: string;
       timezone?: string;
@@ -114,7 +115,7 @@ export const transactions = pgTable(
     date: timestamp("date", { withTimezone: true }).notNull(),
     description: text("description").notNull(),
     reference: varchar("reference", { length: 255 }),
-    journalType: journalTypeEnum("journal_type").default("general"),
+    journalType: journalTypeEnum("type").default("general"),
     isPosted: boolean("is_posted").default(false),
     isReconciled: boolean("is_reconciled").default(false),
     createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -124,7 +125,7 @@ export const transactions = pgTable(
   (table) => ({
     organizationIdIdx: index("transactions_organization_id_idx").on(table.organizationId),
     dateIdx: index("transactions_date_idx").on(table.date),
-    journalTypeIdx: index("transactions_journal_type_idx").on(table.journalType),
+    journalTypeIdx: index("transactions_type_idx").on(table.journalType),
     referenceIdx: index("transactions_reference_idx").on(table.reference),
   })
 );
@@ -177,7 +178,7 @@ export const receipts = pgTable(
     verifiedAt: timestamp("verified_at"),
     verifiedBy: varchar("verified_by", { length: 255 }),
     notes: text("notes"),
-    extractedData: text("extracted_data").$type<{
+    extractedData: jsonb("extracted_data").$type<{
       confidence?: number;
       extractionMethod?: string;
       rawText?: string;
@@ -221,7 +222,7 @@ export const bankTransactions = pgTable(
     isReconciled: boolean("is_reconciled").default(false),
     reconciledAt: timestamp("reconciled_at"),
     notes: text("notes"),
-    rawData: text("raw_data").$type<{
+    rawData: jsonb("raw_data").$type<{
       bankReference?: string;
       code?: string;
       particulars?: string;
