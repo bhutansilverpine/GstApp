@@ -1,13 +1,8 @@
-import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs/server";
+import { getCurrentOrganizationId } from "@/server";
 import { PaymentForm } from "@/components/payments/payment-form";
 
 export default async function PaymentsPage() {
-  const { userId, orgId } = await auth();
-
-  if (!userId || !orgId) {
-    redirect("/sign-in");
-  }
+  const organizationId = await getCurrentOrganizationId();
 
   return (
     <div className="space-y-6">
@@ -22,7 +17,7 @@ export default async function PaymentsPage() {
         {/* Main Content - Payment Form */}
         <div className="lg:col-span-2">
           <PaymentForm
-            organizationId={orgId}
+            organizationId={organizationId}
             defaultAmount={0}
             defaultDescription=""
           />

@@ -1,18 +1,25 @@
 import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs/server";
+import { getCurrentOrganizationId } from "@/server";
 import { getTrialBalance } from "@/lib/db/queries";
 import { BITExportWizard } from "@/components/bit/export-wizard";
 import { BITDataPreview } from "@/components/bit/preview";
+import { db, organizations } from "@/lib/db";
+import { eq } from "drizzle-orm";
 
 export default async function BITExportPage() {
-  const { userId, orgId } = await auth();
+  const organizationId = await getCurrentOrganizationId();
 
-  if (!userId || !orgId) {
-    redirect("/sign-in");
+  // Fetch organization details
+  const org = await db.query.organizations.findFirst({
+    where: eq(organizations.id, organizationId),
+  });
+
+  if (!org) {
+    redirect("/dashboard");
   }
 
   // Fetch trial balance for preview
-  const trialBalance = await getTrialBalance(orgId, new Date());
+  const trialBalance = await getTrialBalance(organizationId, new Date());
 
   return (
     <div className="space-y-6">
@@ -27,9 +34,9 @@ export default async function BITExportPage() {
         {/* Left Column - Export Wizard */}
         <div className="lg:col-span-2">
           <BITExportWizard
-            organizationId={orgId}
-            organizationName="Organization" // You'd fetch this from the org
-            organizationTPN="12345678901" // You'd fetch this from the org
+            organizationId={organizationId}
+            organizationName={org.name}
+            organizationTPN={org.tpn || "NOT SET"}
           />
         </div>
 
@@ -44,9 +51,9 @@ export default async function BITExportPage() {
             </div>
             <BITDataPreview
               trialBalance={trialBalance}
-              organizationName="Organization"
-              organizationTPN="12345678901"
-              gstRegistered={true}
+              organizationName={org.name}
+              organizationTPN={org.tpn || "NOT SET"}
+              gstRegistered={org.gstRegistered || false}
             />
           </div>
         </div>

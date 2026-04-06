@@ -1,3 +1,10 @@
+import * as dotenv from "dotenv";
+import path from "path";
+
+// Load environment variables from .env.local
+dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
+dotenv.config(); // Fallback to .env if needed
+
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import * as schema from "./schema";
@@ -7,7 +14,7 @@ function createClient() {
   const connectionString = process.env.DATABASE_URL;
 
   if (!connectionString) {
-    throw new Error("DATABASE_URL environment variable is not set");
+    throw new Error("DATABASE_URL environment variable is not set. Please check .env.local");
   }
 
   const client = postgres(connectionString, {

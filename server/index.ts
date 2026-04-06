@@ -38,7 +38,13 @@ export * from "./reconciliation/confirm"; // confirmMatch, rejectMatch, batchCon
 export * from "./reconciliation/status"; // getReconciliationStatus, getReconciliationReport, getUnreconciledItems, getReconciliationStats, exportReconciliationData
 
 // ============================================
-// UTILITY FUNCTIONS (from categorize.ts)
+// ORGANIZATION & MULTI-TENANCY
+// ============================================
+
+export * from "./organizations/get"; // getCurrentOrganizationId
+
+// ============================================
+// UTILITY FUNCTIONS (Client-Safe)
 // ============================================
 
 export {
@@ -46,7 +52,8 @@ export {
   extractPaymentMode,
   extractAccountNumber,
   extractMerchantName,
-} from "./bank/categorize";
+  getCategorySuggestions,
+} from "@/lib/bank-utils";
 
 // ============================================
 // TYPE EXPORTS

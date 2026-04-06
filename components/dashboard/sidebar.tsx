@@ -14,7 +14,8 @@ import {
   Building2,
   Receipt,
   TrendingUp,
-  Database
+  Database,
+  BarChart3
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
@@ -28,45 +29,44 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    title: "Dashboard",
+    title: "Overview",
     href: "/dashboard",
     icon: LayoutDashboard,
   },
   {
-    title: "Invoices",
-    href: "/dashboard/invoices",
+    title: "Receipt Vault",
+    href: "/dashboard/receipts",
     icon: Receipt,
-    badge: 3,
   },
   {
-    title: "GST Returns",
-    href: "/dashboard/gst-returns",
+    title: "Transactions",
+    href: "/dashboard/transactions",
     icon: FileText,
   },
   {
-    title: "Tax Calculator",
-    href: "/dashboard/calculator",
-    icon: Calculator,
-  },
-  {
-    title: "Analytics",
-    href: "/dashboard/analytics",
+    title: "Reconciliation",
+    href: "/dashboard/reconcile",
     icon: TrendingUp,
   },
   {
-    title: "Clients",
-    href: "/dashboard/clients",
-    icon: Users,
+    title: "Bank Imports",
+    href: "/dashboard/bank",
+    icon: Database,
   },
   {
-    title: "Organizations",
-    href: "/dashboard/organizations",
+    title: "Payments (RMA)",
+    href: "/dashboard/payments",
+    icon: Calculator,
+  },
+  {
+    title: "BIT Returns",
+    href: "/dashboard/bit",
     icon: Building2,
   },
   {
-    title: "Data Backup",
-    href: "/dashboard/backup",
-    icon: Database,
+    title: "Reports",
+    href: "/dashboard/reports",
+    icon: BarChart3,
   },
 ]
 

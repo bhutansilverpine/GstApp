@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { db } from "./index";
 import { accounts, organizations } from "./schema";
 import { eq } from "drizzle-orm";
@@ -215,4 +216,31 @@ export async function createSampleOrganization() {
     console.error("Error creating sample organization:", error);
     return { success: false, error };
   }
+}
+
+async function main() {
+  console.log("🌱 Seeding database...");
+  try {
+    const result = await createSampleOrganization();
+    if (result.success) {
+      console.log("✅ Database seeded successfully!");
+      console.log("Org ID:", result.organization?.id);
+      console.log("Clerk Org ID:", result.organization?.clerkOrgId);
+      process.exit(0);
+    } else {
+      console.error("❌ Seeding failed:", result.error);
+      process.exit(1);
+    }
+  } catch (err) {
+    console.error("Fatal error during seeding:", err);
+    process.exit(1);
+  }
+}
+
+// Call main if run directly
+if (process.argv[1] && (process.argv[1].endsWith("seed.ts") || process.argv[1].endsWith("seed"))) {
+  main().catch((err) => {
+    console.error("Fatal error during seeding:", err);
+    process.exit(1);
+  });
 }
