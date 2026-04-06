@@ -193,12 +193,14 @@ The application is optimized for Vercel deployment with included `vercel.json` c
 
 ### Setup & Development
 - 📋 [SETUP.md](./SETUP.md) - New developer setup guide
+- 💳 [RMA_INTEGRATION.md](./RMA_INTEGRATION.md) - RMA Payment Gateway integration analysis
 - 📚 [API.md](./API.md) - Complete API documentation
 - 🔧 [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Common issues and solutions
 
 ### Key Documentation Files
 - `DEPLOYMENT.md` - Production deployment guide
 - `SETUP.md` - Local development setup
+- `RMA_INTEGRATION.md` - RMA Payment integration status
 - `API.md` - API endpoints and server actions
 - `TROUBLESHOOTING.md` - Debugging and problem-solving
 
