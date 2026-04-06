@@ -1,0 +1,15 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow admin areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+
+# Disallow authentication pages
+Disallow: /sign-in
+Disallow: /sign-up
+
+# Sitemap
+Sitemap: https://your-app.vercel.app/sitemap.xml
