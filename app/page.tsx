@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ClerkProvider, SignInButton, SignUpButton, UserButton, Show } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, UserButton, Show } from "@clerk/nextjs";
 import {
   ArrowRight,
   Check,
@@ -14,31 +14,35 @@ import {
 
 export default function Home() {
   return (
-    <ClerkProvider>
-      <div className="flex flex-col min-h-screen">
-        {/* Header with Auth */}
-        <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
-              <div className="flex items-center">
-                <h1 className="text-xl font-bold text-primary">Silverpine Ledger</h1>
-              </div>
-              <div className="flex items-center gap-4">
-                <Show when="signed-out">
-                  <SignInButton mode="modal">
-                    <Button variant="ghost">Sign In</Button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <Button>Get Started</Button>
-                  </SignUpButton>
-                </Show>
-                <Show when="signed-in">
+    <div className="flex flex-col min-h-screen">
+      {/* Header with Auth */}
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <div className="flex items-center">
+              <h1 className="text-xl font-bold text-primary">Silverpine Ledger</h1>
+            </div>
+            <div className="flex items-center gap-4">
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <Button variant="ghost">Sign In</Button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <Button>Get Started</Button>
+                </SignUpButton>
+              </Show>
+              <Show when="signed-in">
+                <div className="flex items-center gap-4">
+                  <Button variant="ghost" asChild>
+                    <Link href="/dashboard">Dashboard</Link>
+                  </Button>
                   <UserButton />
-                </Show>
-              </div>
+                </div>
+              </Show>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background py-20 sm:py-32">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
@@ -59,15 +63,25 @@ export default function Home() {
               the compliance.
             </p>
             <div className="mt-10 flex items-center justify-center gap-4">
-              <Button size="lg" className="gap-2" asChild>
-                <Link href="/sign-up">
-                  Get Started Free
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/sign-in">Sign In</Link>
-              </Button>
+              <Show when="signed-out">
+                <Button size="lg" className="gap-2" asChild>
+                  <Link href="/sign-up">
+                    Get Started Free
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/sign-in">Sign In</Link>
+                </Button>
+              </Show>
+              <Show when="signed-in">
+                <Button size="lg" className="gap-2" asChild>
+                  <Link href="/dashboard">
+                    Go to Dashboard
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </Show>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
               No credit card required • 14-day free trial • Cancel anytime
@@ -215,7 +229,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      </div>
-    </ClerkProvider>
+    </div>
   );
 }
