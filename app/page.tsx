@@ -33,7 +33,7 @@ export default function Home() {
                   </SignUpButton>
                 </Show>
                 <Show when="signed-in">
-                  <UserButton afterSignOutUrl="/" />
+                  <UserButton />
                 </Show>
               </div>
             </div>

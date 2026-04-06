@@ -1,4 +1,5 @@
 import { SignUp } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default function SignUpPage() {
   return (
@@ -27,23 +28,23 @@ export default function SignUpPage() {
         </div>
         <p className="mt-6 text-center text-sm text-muted-foreground">
           Already have an account?{" "}
-          <a
+          <Link
             href="/sign-in"
             className="font-medium text-primary hover:underline"
           >
             Sign in
-          </a>
+          </Link>
         </p>
         <div className="mt-8 rounded-lg border bg-muted/50 p-4">
           <p className="text-xs text-center text-muted-foreground">
             By signing up, you agree to our{" "}
-            <a href="#" className="underline hover:text-foreground">
+            <Link href="#" className="underline hover:text-foreground">
               Terms of Service
-            </a>{" "}
+            </Link>{" "}
             and{" "}
-            <a href="#" className="underline hover:text-foreground">
+            <Link href="#" className="underline hover:text-foreground">
               Privacy Policy
-            </a>
+            </Link>
           </p>
         </div>
       </div>
