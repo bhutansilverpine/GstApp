@@ -12,7 +12,8 @@ import crypto from "crypto";
 import {
   RMAPaymentRequest,
   RMAPaymentResponse,
-  RMAPaymentStatus,
+  RMAPaymentStatusType,
+  RMAPaymentStatusInfo,
   RMARefundRequest,
   RMARefundResponse,
   RMAMerchantConfig,
@@ -23,7 +24,7 @@ import {
 } from "./types";
 
 // Re-export types that are needed by other modules
-export type { RMAPaymentRequest, RMAPaymentResponse, RMAPaymentStatus };
+export type { RMAPaymentRequest, RMAPaymentResponse, RMAPaymentStatusType };
 
 // ============================================
 // Configuration
@@ -191,10 +192,9 @@ export async function initializeRMAPayment(
 
     // Generate signature
     const signature = generateSignature(paymentData, RMA_CONFIG.apiSecret);
-    paymentData["signature"] = signature;
 
     // Make API request to create payment
-    const response = await makeRMARequest("/payments", "POST", paymentData);
+    const response = await makeRMARequest("/payments", "POST", { ...paymentData, signature });
 
     if (!response.success || !response.data) {
       throw new RMAError(
@@ -245,7 +245,7 @@ export async function initializeRMAPayment(
 /**
  * Check payment status
  */
-export async function checkRMAPaymentStatus(paymentId: string): Promise<RMAPaymentStatus> {
+export async function checkRMAPaymentStatus(paymentId: string): Promise<RMAPaymentStatusInfo> {
   try {
     console.log("Checking RMA payment status:", paymentId);
 
@@ -319,10 +319,9 @@ export async function processRMARefund(
 
     // Generate signature
     const signature = generateSignature(refundData, RMA_CONFIG.apiSecret);
-    refundData["signature"] = signature;
 
     // Make API request to process refund
-    const response = await makeRMARequest("/refunds", "POST", refundData);
+    const response = await makeRMARequest("/refunds", "POST", { ...refundData, signature });
 
     if (!response.success || !response.data) {
       throw new RMAError(

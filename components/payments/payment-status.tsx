@@ -16,11 +16,11 @@ import {
   Download,
 } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
-import type { RMAPaymentStatus } from "@/server/payments/types";
+import type { RMAPaymentStatusType } from "@/server/payments/types";
 
 interface PaymentStatusDisplayProps {
   paymentId: string;
-  status: RMAPaymentStatus;
+  status: RMAPaymentStatusType;
   amount: number;
   currency: string;
   paymentUrl?: string;
@@ -49,7 +49,7 @@ export function PaymentStatusDisplay({
   onRefresh,
   onCopyPaymentId,
 }: PaymentStatusDisplayProps) {
-  const getStatusConfig = (status: RMAPaymentStatus) => {
+  const getStatusConfig = (status: RMAPaymentStatusType) => {
     switch (status) {
       case "completed":
         return {

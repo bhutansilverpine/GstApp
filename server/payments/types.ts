@@ -9,7 +9,7 @@
 // Payment Types
 // ============================================
 
-export type RMAPaymentStatus = "pending" | "processing" | "completed" | "failed" | "refunded" | "cancelled";
+export type RMAPaymentStatusType = "pending" | "processing" | "completed" | "failed" | "refunded" | "cancelled";
 
 export type RMAPaymentMethod = "qr-code" | "mobile-banking" | "bank-transfer" | "card";
 
@@ -41,7 +41,7 @@ export interface RMAPaymentResponse {
   paymentUrl?: string;
   qrCodeUrl?: string;
   qrCodeData?: string;
-  status: RMAPaymentStatus;
+  status: RMAPaymentStatusType;
   message?: string;
   error?: string;
   expiresAt?: Date;
@@ -51,9 +51,9 @@ export interface RMAPaymentResponse {
 // Payment Status Types
 // ============================================
 
-export interface RMAPaymentStatus {
+export interface RMAPaymentStatusInfo {
   paymentId: string;
-  status: RMAPaymentStatus;
+  status: RMAPaymentStatusType;
   amount: number;
   currency: RMACurrency;
   paidAmount?: number;
@@ -98,7 +98,7 @@ export interface RMAWebhookEvent {
   data: {
     amount: number;
     currency: RMACurrency;
-    status: RMAPaymentStatus;
+    status: RMAPaymentStatusType;
     transactionId?: string;
     bankReference?: string;
     completedAt?: Date;
@@ -141,7 +141,7 @@ export interface RMAPaymentTransaction {
   currency: RMACurrency;
   description: string;
   reference?: string;
-  status: RMAPaymentStatus;
+  status: RMAPaymentStatusType;
   method: RMAPaymentMethod;
   customerId?: string;
   customerName?: string;

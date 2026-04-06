@@ -12,7 +12,7 @@ import type {
 // ============================================
 
 export interface Organization extends DBOrganization {
-  settings?: OrganizationSettings;
+  settings: OrganizationSettings | null;
 }
 
 export interface OrganizationSettings {
@@ -284,13 +284,15 @@ export interface ApiResponse<T = any> {
   message?: string;
 }
 
-export interface PaginatedResponse<T = any> extends ApiResponse<T[]> {
+export interface PaginatedResponse<T = any> {
+  data: T[];
   pagination: {
     page: number;
     limit: number;
     total: number;
     totalPages: number;
   };
+  success?: boolean; // Adding this for backward compatibility if needed, but will move away from it
 }
 
 export interface ValidationError {

@@ -136,7 +136,7 @@ export async function backupTransactionsToSheets(
         },
       });
 
-      spreadsheetId = spreadsheet.data.spreadsheetId;
+      spreadsheetId = spreadsheet.data.spreadsheetId ?? undefined;
       console.log("Created new spreadsheet:", spreadsheetId);
 
       // Move to folder if specified
@@ -459,12 +459,12 @@ export async function getSheetsData(spreadsheetId: string): Promise<{
       sheetTitles.map(async sheetName => {
         const response = await sheets.spreadsheets.values.get({
           spreadsheetId,
-          range: `${sheetName}!A1:Z`,
+          range: `${sheetName ?? 'Sheet1'}!A1:Z`,
         });
 
         const values = response.data.values || [];
         return {
-          name: sheetName,
+          name: sheetName ?? 'Sheet1',
           data: values,
           rowCount: values.length,
           columnCount: values[0]?.length || 0,

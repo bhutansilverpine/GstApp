@@ -1,7 +1,7 @@
 "use server";
 
 import { db, transactions, transactionLines, accounts } from "@/lib/db";
-import { eq, and, desc, like, or, gte, lte } from "drizzle-orm";
+import { eq, and, desc, like, or, gte, lte, sql } from "drizzle-orm";
 import type { ApiResponse, TransactionFilters, PaginatedResponse } from "@/types";
 
 interface ListTransactionsOptions {
@@ -73,10 +73,12 @@ export async function listTransactions({
     }
 
     // Get total count
-    const { count } = await db
+    const [countResult] = await db
       .select({ count: sql<number>`count(*)` })
       .from(transactions)
-      .where(and(...conditions))[0];
+      .where(and(...conditions));
+    
+    const count = Number(countResult?.count || 0);
 
     // Get transactions with pagination
     const transactionList = await db
@@ -116,12 +118,14 @@ export async function listTransactions({
 
     return {
       success: true,
-      data: transactionsWithLines,
-      pagination: {
-        page,
-        limit,
-        total: count || 0,
-        totalPages,
+      data: {
+        data: transactionsWithLines,
+        pagination: {
+          page,
+          limit,
+          total: count,
+          totalPages,
+        },
       },
     };
   } catch (error) {
@@ -418,15 +422,16 @@ export async function getTransactionsSummary(
     }
 
     // Count by journal type
-    const journalTypeMap = new Map<string, number>();
+    const journalTypeMap = new Map<string | null, number>();
     allTransactions.forEach((transaction) => {
-      const count = journalTypeMap.get(transaction.journalType) || 0;
-      journalTypeMap.set(transaction.journalType, count + 1);
+      const type = transaction.journalType;
+      const count = journalTypeMap.get(type) || 0;
+      journalTypeMap.set(type, count + 1);
     });
 
     const byJournalType = Array.from(journalTypeMap.entries()).map(
       ([type, count]) => ({
-        type,
+        type: type || "unknown",
         count,
       })
     );

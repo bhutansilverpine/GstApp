@@ -19,7 +19,7 @@ export * from "./receipts/list"; // listReceipts, getReceipt, getReceiptsSummary
 
 export * from "./bank/process"; // processBankStatement
 export * from "./bank/categorize"; // autoCategorizeTransactions, categorizeTransactionManual, batchCategorizeTransactions, getCategorySuggestions, getCategorizationStats
-export * from "./bank/list"; // listBankTransactions, getBankTransaction, getBankTransactionsSummary, getUnreconciledTransactions, searchBankTransactions, getTransactionsByDateRange, getCashFlowAnalysis, updateTransactionNotes, flagTransaction
+export { listBankTransactions, getBankTransaction, getBankTransactionsSummary, getUnreconciledTransactions, searchBankTransactions, getTransactionsByDateRange as getBankTransactionsByDateRange, getCashFlowAnalysis, updateTransactionNotes, flagTransaction } from "./bank/list";
 
 // ============================================
 // TRANSACTION MANAGEMENT

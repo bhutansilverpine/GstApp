@@ -3,6 +3,7 @@
 import { db, bankTransactions, receipts, transactions } from "@/lib/db";
 import { eq, and, sql, desc } from "drizzle-orm";
 import type { ApiResponse } from "@/types";
+import { confirmMatch } from "./confirm";
 
 interface ReconciliationStatus {
   organizationId: string;
@@ -17,7 +18,7 @@ interface ReconciliationStatus {
   reconciliationProgress: number;
   recentActivity: Array<{
     date: Date;
-    type: string;
+    type: string | null;
     description: string;
   }>;
 }

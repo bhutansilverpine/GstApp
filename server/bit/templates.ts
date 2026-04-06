@@ -341,10 +341,10 @@ export function getAccountsForSchedule(
 /**
  * Group accounts by BIT category
  */
-export function groupAccountsByCategory(
-  accounts: Array<{ code: string; name: string; type: AccountType }>
-): Record<string, Array<{ code: string; name: string; type: AccountType }>> {
-  const grouped: Record<string, Array<{ code: string; name: string; type: AccountType }>> = {};
+export function groupAccountsByCategory<T extends { code: string; name: string; type: AccountType }>(
+  accounts: Array<T>
+): Record<string, Array<T>> {
+  const grouped: Record<string, Array<T>> = {};
 
   accounts.forEach(account => {
     const category = getBITCategory(account.code, account.type);

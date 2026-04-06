@@ -1,13 +1,17 @@
-import { clerkMiddleware } from '@clerk/nextjs/server'
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-export default clerkMiddleware({
-  publicRoutes: [
-    "/",
-    "/sign-in(.*)",
-    "/sign-up(.*)",
-    "/api/webhooks(.*)",
-    "/api/health(.*)",
-  ],
+const isPublicRoute = createRouteMatcher([
+  "/",
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/api/webhooks(.*)",
+  "/api/health(.*)",
+])
+
+export default clerkMiddleware(async (auth, request) => {
+  if (!isPublicRoute(request)) {
+    await auth.protect()
+  }
 })
 
 export const config = {

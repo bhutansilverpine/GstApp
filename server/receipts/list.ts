@@ -90,12 +90,14 @@ export async function listReceipts({
 
     return {
       success: true,
-      data: receiptList,
-      pagination: {
-        page,
-        limit,
-        total: totalCount.length || 0,
-        totalPages,
+      data: {
+        data: receiptList,
+        pagination: {
+          page,
+          limit,
+          total: totalCount.length || 0,
+          totalPages,
+        },
       },
     };
   } catch (error) {
@@ -240,14 +242,17 @@ export async function getUniqueVendors(
       .from(receipts)
       .where(eq(receipts.organizationId, organizationId));
 
-    // Remove duplicates
+    // Remove duplicates and map to required format
     const uniqueVendors = Array.from(
       new Map(
         receiptList
           .filter((r) => r.vendorName)
           .map((r) => [r.vendorName, r])
       ).values()
-    );
+    ).map(v => ({
+      name: v.vendorName as string,
+      tpn: v.vendorTpn || undefined
+    }));
 
     return {
       success: true,

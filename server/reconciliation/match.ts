@@ -3,6 +3,7 @@
 import { db, bankTransactions, receipts } from "@/lib/db";
 import { eq, and, gte, lte, sql } from "drizzle-orm";
 import type { ApiResponse } from "@/types";
+import { confirmMatch } from "./confirm";
 
 interface ReconciliationMatch {
   bankTransactionId: string;

@@ -333,7 +333,7 @@ function generateTrialBalanceSheet(trialBalance: TrialBalanceReport): XLSX.WorkS
  * Generate profit & loss sheet
  */
 function generateProfitLossSheet(trialBalance: TrialBalanceReport): XLSX.WorkSheet {
-  const data = [
+  const data: (string | number)[][] = [
     ["Statement of Profit and Loss"],
     [`For the period ended ${formatBITDate(trialBalance.asOfDate)}`],
     [],
@@ -351,7 +351,7 @@ function generateProfitLossSheet(trialBalance: TrialBalanceReport): XLSX.WorkShe
     // Group by category manually to avoid type issues
     const revenueByCategory: Record<string, typeof revenueAccounts> = {};
     revenueAccounts.forEach(acc => {
-      const category = acc.accountCategory || "Other Revenue";
+      const category = (acc as any).accountCategory || "Other Revenue";
       if (!revenueByCategory[category]) {
         revenueByCategory[category] = [];
       }
@@ -377,7 +377,7 @@ function generateProfitLossSheet(trialBalance: TrialBalanceReport): XLSX.WorkShe
     // Group expenses by category manually
     const expensesByCategory: Record<string, typeof expenseAccounts> = {};
     expenseAccounts.forEach(acc => {
-      const category = acc.accountCategory || "Other Expenses";
+      const category = (acc as any).accountCategory || "Other Expenses";
       if (!expensesByCategory[category]) {
         expensesByCategory[category] = [];
       }
@@ -419,7 +419,7 @@ function generateProfitLossSheet(trialBalance: TrialBalanceReport): XLSX.WorkShe
  * Generate balance sheet
  */
 function generateBalanceSheet(trialBalance: TrialBalanceReport): XLSX.WorkSheet {
-  const data = [
+  const data: (string | number)[][] = [
     ["Balance Sheet"],
     [`As of ${formatBITDate(trialBalance.asOfDate)}`],
     [],
@@ -438,6 +438,7 @@ function generateBalanceSheet(trialBalance: TrialBalanceReport): XLSX.WorkSheet 
       code: acc.accountCode,
       name: acc.accountName,
       type: "asset" as const,
+      balance: acc.balance,
     }));
     const groupedAssets = groupAccountsByCategory(mappedAssetAccounts);
 
@@ -447,7 +448,7 @@ function generateBalanceSheet(trialBalance: TrialBalanceReport): XLSX.WorkSheet 
 
       data.push(["", category, Number(categoryTotal), ""]);
       accounts.forEach(acc => {
-        data.push(["", `  ${acc.accountName}`, Number(acc.balance), acc.accountCode]);
+        data.push(["", `  ${acc.name}`, Number(acc.balance), acc.code]);
       });
     });
     data.push(["", "TOTAL ASSETS", Number(totalAssets), ""]);
@@ -462,6 +463,7 @@ function generateBalanceSheet(trialBalance: TrialBalanceReport): XLSX.WorkSheet 
       code: acc.accountCode,
       name: acc.accountName,
       type: "liability" as const,
+      balance: acc.balance,
     }));
     const groupedLiabilities = groupAccountsByCategory(mappedLiabilityAccounts);
 
@@ -471,7 +473,7 @@ function generateBalanceSheet(trialBalance: TrialBalanceReport): XLSX.WorkSheet 
 
       data.push(["", category, Number(categoryTotal), ""]);
       accounts.forEach(acc => {
-        data.push(["", `  ${acc.accountName}`, Number(Math.abs(acc.balance)), acc.accountCode]);
+        data.push(["", `  ${acc.name}`, Number(Math.abs(acc.balance)), acc.code]);
       });
     });
     data.push(["", "TOTAL LIABILITIES", Number(totalLiabilities), ""]);
@@ -486,6 +488,7 @@ function generateBalanceSheet(trialBalance: TrialBalanceReport): XLSX.WorkSheet 
       code: acc.accountCode,
       name: acc.accountName,
       type: "equity" as const,
+      balance: acc.balance,
     }));
     const groupedEquity = groupAccountsByCategory(mappedEquityAccounts);
 
@@ -495,7 +498,7 @@ function generateBalanceSheet(trialBalance: TrialBalanceReport): XLSX.WorkSheet 
 
       data.push(["", category, Number(categoryTotal), ""]);
       accounts.forEach(acc => {
-        data.push(["", `  ${acc.accountName}`, Number(acc.balance), acc.accountCode]);
+        data.push(["", `  ${acc.name}`, Number(acc.balance), acc.code]);
       });
     });
     data.push(["", "TOTAL EQUITY", Number(totalEquity), ""]);
@@ -525,7 +528,7 @@ function generateBalanceSheet(trialBalance: TrialBalanceReport): XLSX.WorkSheet 
 function generateGSTReconciliationSheet(trialBalance: TrialBalanceReport, organization: any): XLSX.WorkSheet {
   const gstRate = Number(organization.gstRate) || 7;
 
-  const data = [
+  const data: (string | number)[][] = [
     ["GST Reconciliation Statement"],
     [`For the period ended ${formatBITDate(trialBalance.asOfDate)}`],
     [],
@@ -599,7 +602,7 @@ function generateGSTReconciliationSheet(trialBalance: TrialBalanceReport, organi
  * Generate depreciation schedule sheet
  */
 function generateDepreciationScheduleSheet(trialBalance: TrialBalanceReport): XLSX.WorkSheet {
-  const data = [
+  const data: (string | number)[][] = [
     ["Depreciation Schedule"],
     [`For the period ended ${formatBITDate(trialBalance.asOfDate)}`],
     [],

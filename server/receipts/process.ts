@@ -261,7 +261,7 @@ ADDITIONAL INSTRUCTIONS:
     }
 
     // Create receipt records in database
-    const receiptInputs: CreateReceiptInput[] = [];
+    const receiptInputs: any[] = [];
 
     for (const extracted of extractedReceipts) {
       // Parse date
@@ -300,14 +300,14 @@ ADDITIONAL INSTRUCTIONS:
         rawText: `${extracted.bill_no},${extracted.vendor},${extracted.tpn},${extracted.date},${extracted.category},${extracted.amount}`,
       };
 
-      const receiptInput: CreateReceiptInput = {
+      const receiptInput: any = {
         organizationId: organizationId,
         vendorName: extracted.vendor,
         vendorTpn: extracted.tpn || undefined,
         date: receiptDate,
-        subtotal: subtotal,
-        gstAmount: gstAmount,
-        totalAmount: extracted.amount,
+        subtotal: subtotal.toString(),
+        gstAmount: gstAmount.toString(),
+        totalAmount: extracted.amount.toString(),
         currency: "BTN",
         category: extracted.category,
         description: `Bill No: ${extracted.bill_no}`,
@@ -510,14 +510,14 @@ RULES:
     const subtotal = extractedData.amount - gstAmount;
 
     // Prepare receipt input
-    const receiptInput: CreateReceiptInput = {
+    const receiptInput: any = {
       organizationId: organizationId,
       vendorName: extractedData.vendor,
       vendorTpn: extractedData.tpn || undefined,
       date: receiptDate,
-      subtotal: subtotal,
-      gstAmount: gstAmount,
-      totalAmount: extractedData.amount,
+      subtotal: subtotal.toString(),
+      gstAmount: gstAmount.toString(),
+      totalAmount: extractedData.amount.toString(),
       currency: "BTN",
       category: extractedData.category,
       description: `Bill No: ${extractedData.bill_no}`,

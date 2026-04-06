@@ -53,17 +53,25 @@ export async function verifyReceipt(
       }
     }
 
-    // Update receipt with verified data
+    // Create receipt records in database
+    const receiptInputs: any[] = [];
+    const updateData: any = {
+      ...updates,
+      gstAmount: gstAmount?.toString(),
+      subtotal: subtotal?.toString(),
+      status: "verified",
+      verifiedAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    // Ensure totalAmount is a string if it exists in updates
+    if (updates.totalAmount !== undefined) {
+      updateData.totalAmount = updates.totalAmount.toString();
+    }
+
     const updatedReceipts = await db
       .update(receipts)
-      .set({
-        ...updates,
-        gstAmount: gstAmount?.toString(),
-        subtotal: subtotal?.toString(),
-        status: "verified",
-        verifiedAt: new Date(),
-        updatedAt: new Date(),
-      })
+      .set(updateData)
       .where(
         and(
           eq(receipts.id, receiptId),
