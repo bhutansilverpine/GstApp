@@ -3,6 +3,7 @@ import { GlassCard } from "@/components/dashboard/glass-card"
 import { Breadcrumb } from "@/components/dashboard/breadcrumb"
 import { WorkflowChecklist } from "@/components/dashboard/workflow-checklist"
 import { PremiumCard, PremiumButton } from "@/components/ui"
+import { DriveConnectionWrapper } from "@/components/google/drive-connection-wrapper"
 import {
   CircleDollarSign,
   FileText,
@@ -15,7 +16,6 @@ import {
   RefreshCw,
   CheckCircle2,
   Clock,
-  CircleDollarSign,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -88,12 +88,12 @@ export default async function DashboardPage() {
           change={0}
           changeType="increase"
           trend="up"
-          icon={<DollarSign className="h-4 w-4" />}
+          icon={<CircleDollarSign className="h-4 w-4" />}
           description="Net credits this month"
         />
         <MetricCard
           title="Total Cash Outflow"
-          value={`₹${totalOutflow.toLocaleString()}`}
+          value={`Nu.${totalOutflow.toLocaleString()}`}
           change={0}
           changeType="decrease"
           trend="down"
@@ -102,7 +102,7 @@ export default async function DashboardPage() {
         />
         <MetricCard
           title="GST Claimable"
-          value={`₹${gstClaimable.toLocaleString()}`}
+          value={`Nu.${gstClaimable.toLocaleString()}`}
           change={0}
           changeType="increase"
           trend="up"
@@ -172,6 +172,9 @@ export default async function DashboardPage() {
         {/* Quick Actions & Workflow Checklist */}
         <div className="lg:col-span-3 space-y-6">
           <WorkflowChecklist />
+
+          {/* Google Drive Connection */}
+          <DriveConnectionWrapper orgName={org?.name} />
 
           <GlassCard title="Quick Actions">
             <div className="space-y-2">

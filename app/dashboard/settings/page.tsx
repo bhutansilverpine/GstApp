@@ -61,7 +61,7 @@ export default async function SettingsPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="currency">Base Currency</Label>
-                  <Input id="currency" defaultValue={org?.settings?.currency || "NZD"} disabled />
+                  <Input id="currency" defaultValue={org?.settings?.currency || "BTN"} disabled />
                 </div>
               </div>
               <Button>Save Changes</Button>

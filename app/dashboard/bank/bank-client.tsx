@@ -10,7 +10,7 @@ import { toast } from "sonner"
 import {
   Building2,
   ArrowUpDown,
-  IndianRupee,
+  CircleDollarSign,
   TrendingUp,
   AlertCircle,
 } from "lucide-react"
@@ -87,7 +87,7 @@ export function BankClient({
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Bank Statements</h1>
           <p className="text-muted-foreground">
-            Upload and manage bank transactions for INR/NZD accounts
+            Upload and manage bank transactions for Bhutan banks (BOB, BNB)
           </p>
         </div>
         <Button className="gap-2" onClick={() => setActiveTab("upload")}>
@@ -116,7 +116,7 @@ export function BankClient({
               <div>
                 <p className="text-sm text-muted-foreground">Total Credits</p>
                 <p className="text-2xl font-bold text-green-500">
-                  ₹{totalCredits.toLocaleString()}
+                  Nu.{totalCredits.toLocaleString()}
                 </p>
               </div>
               <TrendingUp className="h-8 w-8 text-green-500 opacity-50" />
@@ -130,10 +130,10 @@ export function BankClient({
               <div>
                 <p className="text-sm text-muted-foreground">Total Debits</p>
                 <p className="text-2xl font-bold text-red-500">
-                  ₹{totalDebits.toLocaleString()}
+                  Nu.{totalDebits.toLocaleString()}
                 </p>
               </div>
-              <IndianRupee className="h-8 w-8 text-red-500 opacity-50" />
+              <CircleDollarSign className="h-8 w-8 text-red-500 opacity-50" />
             </div>
           </CardContent>
         </Card>

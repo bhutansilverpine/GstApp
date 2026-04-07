@@ -201,9 +201,9 @@ export async function createSampleOrganization() {
         gstRate: "15",
         fiscalYearEnd: "03-31",
         settings: {
-          currency: "NZD",
+          currency: "BTN",
           dateFormat: "DD/MM/YYYY",
-          timezone: "Pacific/Auckland",
+          timezone: "Asia/Thimphu",
         },
       })
       .returning();

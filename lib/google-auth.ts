@@ -176,10 +176,10 @@ export async function initiateGoogleAuth(returnUrl: string = "/dashboard"): Prom
 
     // Create authorization URL using Clerk's OAuth
     // This will redirect users to grant Google permissions
-    const state = encodeURIComponent(JSON.stringify {
+    const state = encodeURIComponent(JSON.stringify({
       return_url: returnUrl,
       user_id: userId,
-    });
+    }));
 
     // Construct the Google OAuth URL with required scopes
     const scopes = [
