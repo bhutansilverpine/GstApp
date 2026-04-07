@@ -2,76 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-/* DaisyUI styles */
-@layer components {
-  /* Enhanced DaisyUI base styles for Clerk-like design */
-  .card {
-    @apply bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow duration-200;
-  }
-
-  .btn {
-    @apply font-medium transition-all duration-200;
-  }
-
-  /* Clerk-like button styles */
-  .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] focus-visible:ring-2 focus:ring-primary/50 focus:ring-offset-2;
-  }
-
-  .btn-ghost {
-    @apply hover:bg-accent hover:text-accent-foreground active:scale-[0.98];
-  }
-
-  /* Premium input styles like Clerk */
-  .input {
-    @apply focus:ring-2 focus:ring-primary/50 focus:ring-offset-0 focus:border-primary;
-  }
-}
+/* ============================================
+   Clerk-inspired Design System
+   Clean, professional SaaS aesthetic
+   ============================================ */
 
 @layer base {
   :root {
+    /* Clerk-inspired color palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 9%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 239 84% 67%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 239 84% 67%;
-    --radius: 0.5rem;
+    --popover-foreground: 0 0% 9%;
+    --primary: 251 91% 67%; /* Clerk purple */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 240 5% 96%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 251 91% 67%;
+    --radius: 0.625rem; /* Slightly larger radius like Clerk */
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 239 84% 67%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 239 84% 67%;
+    --background: 0 0% 9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 11%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 11%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 251 91% 67%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 251 91% 67%;
   }
 }
 
@@ -79,443 +59,286 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Smooth transitions for all interactive elements */
+  button, a, input, select, textarea {
+    @apply transition-colors duration-150;
   }
 }
 
-/* Custom scrollbar styles */
+/* ============================================
+   Clerk-style Component Base Classes
+   ============================================ */
+
+@layer components {
+  /* Clerk-style Card */
+  .card {
+    @apply bg-card text-card-foreground rounded-xl border border-border;
+  }
+
+  /* Clerk-style Button */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg text-sm font-medium;
+    @apply transition-all duration-150 focus-visible:outline-none focus-visible:ring-2;
+    @apply focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none;
+    @apply disabled:opacity-50;
+    @apply h-10 px-4 py-2;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+    @apply shadow-sm hover:shadow active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+    @apply shadow-sm hover:shadow;
+  }
+
+  .btn-ghost {
+    @apply hover:bg-accent hover:text-accent-foreground;
+    @apply active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
+    @apply shadow-sm hover:shadow;
+  }
+
+  /* Clerk-style Input */
+  .input {
+    @apply flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm;
+    @apply ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium;
+    @apply placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2;
+    @apply focus-visible:ring-ring focus-visible:ring-offset-2;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+    @apply transition-all duration-150;
+  }
+
+  /* Clerk-style Select */
+  .select {
+    @apply flex h-10 w-full items-center justify-between rounded-lg border border-input;
+    @apply bg-background px-3 py-2 text-sm ring-offset-background;
+    @apply placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring;
+    @apply focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply transition-all duration-150;
+  }
+
+  /* Clerk-style Label */
+  .label {
+    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  }
+
+  /* Clerk-style Badge */
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+    @apply transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  }
+
+  /* Clerk-style Table */
+  .table-clerk {
+    @apply w-full caption-bottom border-collapse;
+  }
+
+  .table-clerk th {
+    @apply px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-300;
+    @apply uppercase tracking-wider border-b;
+  }
+
+  .table-clerk td {
+    @apply px-4 py-3 text-sm border-b;
+  }
+
+  .table-clerk tr:hover {
+    @apply bg-muted/50;
+  }
+
+  /* Premium card styles like Clerk */
+  .card-clerk {
+    @apply bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800;
+    @apply shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  .card-clerk-header {
+    @apply px-6 py-4 border-b border-gray-200 dark:border-gray-800;
+  }
+
+  .card-clerk-title {
+    @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
+  }
+
+  .card-clerk-description {
+    @apply text-sm text-gray-500 dark:text-gray-400 mt-1;
+  }
+
+  .card-clerk-content {
+    @apply px-6 py-4;
+  }
+}
+
+/* ============================================
+   Clerk-style Form Elements
+   ============================================ */
+
+@layer components {
+  /* Form group */
+  .form-group {
+    @apply space-y-2;
+  }
+
+  /* Clerk-style Textarea */
+  .textarea {
+    @apply flex min-h-[80px] w-full rounded-lg border border-input bg-background px-3 py-2 text-sm;
+    @apply ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none;
+    @apply focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+    @apply transition-all duration-150;
+  }
+
+  /* Clerk-style Checkbox */
+  .checkbox {
+    @apply h-4 w-4 rounded border-gray-300 text-primary focus:ring-2 focus:ring-primary;
+    @apply focus:ring-offset-0;
+  }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
 @layer utilities {
+  /* Scrollbar styling */
   .scrollbar-thin::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-track {
-    @apply bg-muted;
+    @apply bg-transparent;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/30 rounded-md;
+    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground/50;
+    @apply bg-gray-400 dark:bg-gray-500;
+  }
+
+  /* Clerk-style focus ring */
+  .focus-ring-clerk {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2;
+  }
+
+  /* Clerk-style section divider */
+  .divider-clerk {
+    @apply border-t border-gray-200 dark:border-gray-800;
+  }
+
+  /* Clerk-style skeleton loading */
+  .skeleton-clerk {
+    @apply animate-pulse bg-gray-200 dark:bg-gray-800 rounded;
   }
 }
 
-/* Glassmorphism utilities */
-@layer utilities {
-  .glass {
-    @apply bg-background/80 backdrop-blur-md border-border/50;
-  }
+/* ============================================
+   Dashboard-specific styles (Clerk-inspired)
+   ============================================ */
 
-  .glass-strong {
-    @apply bg-background/90 backdrop-blur-lg border-border/50;
-  }
-}
-
-/* Animation utilities */
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-shimmer {
-  animation: shimmer 2s infinite linear;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    transparent 100%
-  );
-  background-size: 1000px 100%;
-}
-
-/* Clerk.com inspired premium animations */
-@keyframes shimmer-clerk {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-.animate-shimmer-clerk {
-  animation: shimmer-clerk 1.5s infinite linear;
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in-up 0.3s ease-out;
-}
-
-.animate-scale-in {
-  animation: scale-in 0.2s ease-out;
-}
-
-.animate-slide-in {
-  animation: slide-in-from-right 0.4s ease-out;
-}
-
-/* Pulse effect for loading states like Clerk.com */
-@keyframes pulse-clerk {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-.animate-pulse-clerk {
-  animation: pulse-clerk 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Premium hover lift effect like Clerk.com */
-.hover-lift {
-  transition: all 0.2s ease-in-out;
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  }
-}
-
-/* Premium focus states like Clerk.com */
-.focus-ring-clerk {
-  outline-style: solid 2px;
-  outline-color: rgba(99, 102, 241, 0.5);
-  outline-offset: 2px;
-}
-
-/* Clerk-like premium animations */
-.animate-fade-in {
-  animation: fade-in-up 0.3s ease-out;
-}
-
-.animate-scale-in {
-  animation: scale-in 0.2s ease-out;
-}
-
-/* Premium card styles like Clerk.com */
-.card-clerk {
-  @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-lg transition-all duration-200;
-}
-
-.card-clerk-hover:hover {
-  @apply shadow-lg scale-[1.01] border-gray-300 dark:border-gray-600;
-}
-
-/* Premium form styles */
-.input-clerk {
-  @apply w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-primary focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 placeholder:text-gray-400 dark:placeholder:text-gray-500 disabled:cursor-not-allowed disabled:opacity-50;
-}
-
-/* Premium button styles like Clerk.com */
-.button-clerk {
-  @apply inline-flex items-center justify-center rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
-  @apply h-10 px-4 py-2;
-  @apply shadow-sm hover:shadow-md active:scale-[0.98];
-}
-
-/* Primary button - Clerk blue */
-.button-clerk-primary {
-  @apply bg-primary text-white hover:bg-primary/90 active:bg-primary/80;
-}
-
-/* Secondary button */
-.button-clerk-secondary {
-  @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700;
-}
-
-/* Ghost button */
-.button-clerk-ghost {
-  @apply bg-transparent text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800;
-}
-
-/* Skeleton loader like Clerk */
-.skeleton-clerk {
-  @apply animate-pulse bg-gray-200 dark:bg-gray-700 rounded;
-}
-
-.skeleton-text {
-  @apply h-4 w-3/4 rounded;
-}
-
-.skeleton-circle {
-  @apply h-12 w-12 rounded-full;
-}
-
-/* Shimmer effect like Clerk */
-.shimmer-clerk {
-  @apply relative overflow-hidden;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.06),
-    transparent
-  );
-  background-size: 200% 100%;
-  animation: shimmer-clerk 2s infinite;
-}
-
-@keyframes shimmer-clerk {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-/* Premium dropdown styles like Clerk */
-.dropdown-clerk {
-  @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg shadow-xl;
-  @apply z-50 min-w-[8rem];
-}
-
-/* Focus ring styles like Clerk */
-.focus-ring-clerk {
-  @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-gray-100;
-}
-
-/* Badge styles like Clerk */
-.badge-clerk {
-  @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
-}
-
-/* Premium table styles like Clerk */
-.table-clerk {
-  @apply w-full caption-bottom border-collapse;
-}
-
-.table-clerk th {
-  @apply px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider;
-}
-
-.table-clerk td {
-  @apply px-4 py-3 text-sm;
-}
-
-/* Premium divider like Clerk */
-.divider-clerk {
-  @apply border-t border-gray-200 dark:border-gray-700 my-6;
-}
-
-/* Clerk.com inspired gradient backgrounds */
-.bg-clerk-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-/* Premium text gradients */
-.text-gradient-clerk {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70;
-}
-
-/* Enhanced DaisyUI styles for Clerk-like premium feel */
 @layer components {
-  /* Enhanced card styles */
-  .card-clerk-premium {
-    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300;
-    @apply border border-gray-200/60 dark:border-gray-700/60 backdrop-blur-sm;
+  /* Dashboard header */
+  .dashboard-header {
+    @apply space-y-1 mb-8;
   }
 
-  /* Premium badge styles */
-  .badge-premium {
-    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold transition-all duration-200;
-    @apply shadow-sm hover:shadow-md;
+  .dashboard-title {
+    @apply text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100;
   }
 
-  /* Premium button styles with Clerk-like interactions */
-  .button-premium {
-    @apply relative inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200;
-    @apply px-6 py-3 text-sm;
-    @apply shadow-sm hover:shadow-lg active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus:ring-primary/50 focus:ring-offset-2;
+  .dashboard-description {
+    @apply text-sm text-gray-500 dark:text-gray-400;
   }
 
-  .button-premium-primary {
-    @apply bg-gradient-to-r from-primary to-primary/80 text-white;
-    @apply hover:from-primary hover:to-primary/90 active:from-primary/90 active:to-primary/70;
+  /* Metric card */
+  .metric-card {
+    @apply bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800;
+    @apply p-6 shadow-sm hover:shadow-md transition-shadow duration-200;
   }
 
-  .button-premium-secondary {
-    @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100;
-    @apply border border-gray-300 dark:border-gray-700 shadow-sm;
-    @apply hover:bg-gray-50 dark:hover:bg-gray-800 hover:shadow-md;
+  .metric-value {
+    @apply text-2xl font-bold text-gray-900 dark:text-gray-100;
   }
 
-  /* Premium input styles */
-  .input-premium {
-    @apply w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900;
-    @apply text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none;
-    @apply focus:shadow-lg transition-all duration-200;
-    @apply placeholder:text-gray-400 dark:placeholder:text-gray-500;
+  .metric-label {
+    @apply text-sm text-gray-500 dark:text-gray-400;
   }
 
-  /* Premium dropdown styles */
-  .dropdown-premium {
-    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl;
-    @apply z-50 min-w-[12rem] p-1 space-y-1;
+  /* Navigation item (Clerk-style) */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium;
+    @apply text-gray-600 dark:text-gray-400;
+    @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+    @apply hover:text-gray-900 dark:hover:text-gray-100;
+    @apply transition-all duration-150;
+  }
+
+  .nav-item-active {
+    @apply bg-gray-100 dark:bg-gray-800;
+    @apply text-gray-900 dark:text-gray-100;
   }
 }
 
-/* Enhanced skeleton loading animations like Clerk.com */
+/* ============================================
+   Clerk Animations
+   ============================================ */
+
 @layer utilities {
-  /* Enhanced shimmer effect */
-  .skeleton-premium {
-    @apply relative overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-lg;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(99, 102, 241, 0.1) 50%,
-      transparent
-    );
-    background-size: 200% 100%;
-    animation: shimmer-clerk 1.5s infinite;
+  @keyframes clerk-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  /* Pulse effect for loading states */
-  .pulse-clerk {
-    @apply animate-pulse;
-    animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-}
-
-@keyframes pulse-soft {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-/* Premium typography like Clerk.com */
-@layer base {
-  body {
-    @apply font-sans antialiased;
-    font-feature-settings: "cv11", "cal", "calt", "clc", "liga", "kern", "tnum";
+  @keyframes clerk-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
+  .animate-clerk-fade-in {
+    animation: clerk-fade-in 0.2s ease-out;
   }
 
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-  }
-
-  h3 {
-    @apply text-2xl md:text-3xl lg:text-4xl;
-  }
-
-  h4 {
-    @apply text-xl md:text-2xl lg:text-3xl;
-  }
-
-  p {
-    @apply leading-relaxed text-gray-700 dark:text-gray-300;
-  }
-
-  /* Enhanced focus states */
-  *:focus-visible {
-    @apply outline-none;
-  }
-
-  *:focus-visible {
-    @apply focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-gray-100;
+  .animate-clerk-scale-in {
+    animation: clerk-scale-in 0.2s ease-out;
   }
 }
 
-/* Glassmorphism enhancements like Clerk.com */
-@layer components {
-  .glass-premium {
-    @apply bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50;
-    @apply shadow-xl rounded-2xl;
+/* ============================================
+   Remove animations for reduced motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-
-  .glass-card-premium {
-    @apply bg-gradient-to-br from-white/80 to-white/60 dark:from-gray-800/80 dark:to-gray-900/80;
-    @apply backdrop-blur-md border border-white/50 dark:border-gray-700/50;
-    @apply shadow-2xl rounded-2xl;
-  }
-}
-
-/* Animation utilities */
-.animate-in-up {
-  animation: fade-in-up 0.3s ease-out;
-}
-
-.animate-in-scale {
-  animation: scale-in 0.2s ease-out;
-}
-
-.animate-slide-in {
-  animation: slide-in-from-right 0.4s ease-out;
-}
-
-/* Hover lift effect like Clerk.com */
-.hover-lift {
-  @apply transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl;
-}
-
-/* Premium text gradients */
-.text-gradient-primary {
-  @apply bg-gradient-to-r from-primary via-primary/70 to-primary/40 bg-clip-text text-transparent;
-}
-
-.text-gradient-accent {
-  @apply bg-gradient-to-r from-accent via-accent/70 to-accent/40 bg-clip-text text-transparent;
 }
