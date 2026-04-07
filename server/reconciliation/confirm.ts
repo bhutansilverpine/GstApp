@@ -149,9 +149,9 @@ export async function confirmMatch(
     );
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/reconciliation`);
-    revalidatePath(`/dashboard/${organizationId}/bank`);
-    revalidatePath(`/dashboard/${organizationId}/receipts`);
+    revalidatePath('/dashboard/reconcile');
+    revalidatePath('/dashboard/bank');
+    revalidatePath('/dashboard/receipts');
 
     return {
       success: true,
@@ -200,7 +200,7 @@ export async function rejectMatch(
     console.log(`Rejected match for bank transaction: ${bankTransactionId} - ${reason}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/reconciliation`);
+    revalidatePath('/dashboard/reconcile');
 
     return {
       success: true,
@@ -326,10 +326,10 @@ export async function unconfirmMatch(
     console.log(`Unconfirmed match for bank transaction: ${bankTransactionId}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/reconciliation`);
-    revalidatePath(`/dashboard/${organizationId}/bank`);
-    revalidatePath(`/dashboard/${organizationId}/receipts`);
-    revalidatePath(`/dashboard/${organizationId}/transactions`);
+    revalidatePath('/dashboard/reconcile');
+    revalidatePath('/dashboard/bank');
+    revalidatePath('/dashboard/receipts');
+    revalidatePath('/dashboard/transactions');
 
     return {
       success: true,
@@ -467,8 +467,8 @@ export async function reconcileWithoutReceipt(
     );
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/reconciliation`);
-    revalidatePath(`/dashboard/${organizationId}/bank`);
+    revalidatePath('/dashboard/reconcile');
+    revalidatePath('/dashboard/bank');
 
     return {
       success: true,

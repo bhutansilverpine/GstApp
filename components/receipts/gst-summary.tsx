@@ -3,7 +3,7 @@
 import {
   TrendingUp,
   TrendingDown,
-  IndianRupee,
+  CircleDollarSign,
   AlertCircle,
   CheckCircle2,
   PieChart,
@@ -70,7 +70,7 @@ export function GSTSummary({ data, onExport, dateRange = "This Month" }: GSTSumm
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Total GST
             </CardTitle>
-            <IndianRupee className="h-4 w-4 text-muted-foreground" />
+            <CircleDollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">

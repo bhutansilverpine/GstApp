@@ -5,7 +5,7 @@ import {
   Plus,
   Trash2,
   Save,
-  IndianRupee,
+  CircleDollarSign,
   Calendar,
   FileText,
   AlertCircle,
@@ -269,7 +269,7 @@ export function JournalEntry({ onSave, accounts = [] }: JournalEntryProps) {
 
                   <div className="col-span-2">
                     <div className="relative">
-                      <IndianRupee className="absolute left-2 top-1/2 transform -translate-y-1/2 h-3 w-3 text-muted-foreground" />
+                      <CircleDollarSign className="absolute left-2 top-1/2 transform -translate-y-1/2 h-3 w-3 text-muted-foreground" />
                       <Input
                         type="number"
                         step="0.01"
@@ -284,7 +284,7 @@ export function JournalEntry({ onSave, accounts = [] }: JournalEntryProps) {
 
                   <div className="col-span-2">
                     <div className="relative">
-                      <IndianRupee className="absolute left-2 top-1/2 transform -translate-y-1/2 h-3 w-3 text-muted-foreground" />
+                      <CircleDollarSign className="absolute left-2 top-1/2 transform -translate-y-1/2 h-3 w-3 text-muted-foreground" />
                       <Input
                         type="number"
                         step="0.01"

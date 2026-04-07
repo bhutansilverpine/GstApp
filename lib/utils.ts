@@ -11,8 +11,8 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * Format currency amount
  */
-export function formatCurrency(amount: number, currency: string = "INR"): string {
-  return new Intl.NumberFormat("en-IN", {
+export function formatCurrency(amount: number, currency: string = "BTN"): string {
+  return new Intl.NumberFormat("en-BT", {
     style: "currency",
     currency,
     minimumFractionDigits: 2,
@@ -24,7 +24,7 @@ export function formatCurrency(amount: number, currency: string = "INR"): string
  */
 export function formatDate(date: Date | string): string {
   const dateObj = typeof date === "string" ? new Date(date) : date;
-  return new Intl.DateTimeFormat("en-IN", {
+  return new Intl.DateTimeFormat("en-BT", {
     year: "numeric",
     month: "long",
     day: "numeric",

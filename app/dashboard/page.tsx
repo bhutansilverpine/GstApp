@@ -1,8 +1,10 @@
 import { MetricCard } from "@/components/dashboard/metric-card"
 import { GlassCard } from "@/components/dashboard/glass-card"
 import { Breadcrumb } from "@/components/dashboard/breadcrumb"
+import { WorkflowChecklist } from "@/components/dashboard/workflow-checklist"
+import { PremiumCard, PremiumButton } from "@/components/ui"
 import {
-  DollarSign,
+  CircleDollarSign,
   FileText,
   TrendingUp,
   Users,
@@ -13,6 +15,7 @@ import {
   RefreshCw,
   CheckCircle2,
   Clock,
+  CircleDollarSign,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -81,7 +84,7 @@ export default async function DashboardPage() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <MetricCard
           title="Total Cash Inflow"
-          value={`₹${totalInflow.toLocaleString()}`}
+          value={`Nu. ${totalInflow.toLocaleString()}`}
           change={0}
           changeType="increase"
           trend="up"
@@ -166,8 +169,10 @@ export default async function DashboardPage() {
           </div>
         </GlassCard>
 
-        {/* Quick Actions & Deadlines */}
+        {/* Quick Actions & Workflow Checklist */}
         <div className="lg:col-span-3 space-y-6">
+          <WorkflowChecklist />
+
           <GlassCard title="Quick Actions">
             <div className="space-y-2">
               <Button variant="outline" className="w-full justify-start gap-2" asChild>

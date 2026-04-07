@@ -195,8 +195,8 @@ export async function processBankStatement(
         : 0;
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/bank`);
-    revalidatePath(`/dashboard/${organizationId}/reconciliation`);
+    revalidatePath('/dashboard/bank');
+    revalidatePath('/dashboard/reconcile');
 
     return {
       success: true,

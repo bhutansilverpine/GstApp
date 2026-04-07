@@ -130,8 +130,8 @@ export async function createTransaction(
     console.log(`Created transaction: ${result.transaction.id}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/transactions`);
-    revalidatePath(`/dashboard/${organizationId}/reports`);
+    revalidatePath('/dashboard/transactions');
+    revalidatePath('/dashboard/reports');
 
     return {
       success: true,
@@ -329,8 +329,8 @@ export async function postTransaction(
     console.log(`Posted transaction: ${transactionId}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/transactions`);
-    revalidatePath(`/dashboard/${organizationId}/reports`);
+    revalidatePath('/dashboard/transactions');
+    revalidatePath('/dashboard/reports');
 
     return {
       success: true,
@@ -432,8 +432,8 @@ export async function reverseTransaction(
     console.log(`Reversed transaction: ${transactionId}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/transactions`);
-    revalidatePath(`/dashboard/${organizationId}/reports`);
+    revalidatePath('/dashboard/transactions');
+    revalidatePath('/dashboard/reports');
 
     return {
       success: true,
@@ -498,8 +498,8 @@ export async function deleteTransaction(
     console.log(`Deleted transaction: ${transactionId}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/transactions`);
-    revalidatePath(`/dashboard/${organizationId}/reports`);
+    revalidatePath('/dashboard/transactions');
+    revalidatePath('/dashboard/reports');
 
     return {
       success: true,
@@ -601,8 +601,8 @@ export async function updateTransaction(
     console.log(`Updated transaction: ${transactionId}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/transactions`);
-    revalidatePath(`/dashboard/${organizationId}/reports`);
+    revalidatePath('/dashboard/transactions');
+    revalidatePath('/dashboard/reports');
 
     return {
       success: true,

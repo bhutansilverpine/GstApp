@@ -328,7 +328,7 @@ ADDITIONAL INSTRUCTIONS:
     console.log(`Created ${insertedReceipts.length} receipt records`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/receipts`);
+    revalidatePath('/dashboard/receipts');
 
     return {
       success: true,
@@ -540,7 +540,7 @@ RULES:
     console.log(`Created receipt record: ${insertedReceipt[0].id}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/receipts`);
+    revalidatePath('/dashboard/receipts');
 
     return {
       success: true,

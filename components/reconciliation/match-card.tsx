@@ -7,7 +7,7 @@ import {
   AlertTriangle,
   Sparkles,
   ArrowRight,
-  IndianRupee,
+  CircleDollarSign,
   Calendar,
   Building2,
   Tag,
@@ -114,7 +114,7 @@ export function MatchCard({ match, onConfirm, onReject, onSkip }: MatchCardProps
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Amount</span>
                 <div className="flex items-center gap-2">
-                  <IndianRupee className="h-4 w-4 text-muted-foreground" />
+                  <CircleDollarSign className="h-4 w-4 text-muted-foreground" />
                   <span className="text-lg font-bold">
                     {formatCurrency(bankTransaction.amount)}
                   </span>
@@ -162,7 +162,7 @@ export function MatchCard({ match, onConfirm, onReject, onSkip }: MatchCardProps
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Amount</span>
                 <div className="flex items-center gap-2">
-                  <IndianRupee className="h-4 w-4 text-muted-foreground" />
+                  <CircleDollarSign className="h-4 w-4 text-muted-foreground" />
                   <span className="text-lg font-bold">
                     {formatCurrency(receipt.amount)}
                   </span>

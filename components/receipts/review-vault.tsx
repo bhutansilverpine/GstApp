@@ -6,7 +6,7 @@ import {
   CheckCircle2,
   XCircle,
   AlertTriangle,
-  IndianRupee,
+  CircleDollarSign,
   Calendar,
   Building2,
   BadgeCheck,
@@ -191,7 +191,7 @@ export function ReviewVault({
                   )}
                 </p>
               </div>
-              <IndianRupee className="h-8 w-8 text-primary opacity-50" />
+              <CircleDollarSign className="h-8 w-8 text-primary opacity-50" />
             </div>
           </CardContent>
         </Card>
@@ -348,7 +348,7 @@ export function ReviewVault({
                   {/* Amount */}
                   <div className="space-y-2">
                     <label className="text-sm font-medium flex items-center gap-2">
-                      <IndianRupee className="h-4 w-4 text-primary" />
+                      <CircleDollarSign className="h-4 w-4 text-primary" />
                       Amount
                     </label>
                     {editingId === receipt.id ? (
@@ -537,7 +537,7 @@ export function ReviewVault({
                   {/* GST Amount */}
                   <div className="space-y-2">
                     <label className="text-sm font-medium flex items-center gap-2">
-                      <IndianRupee className="h-4 w-4 text-green-500" />
+                      <CircleDollarSign className="h-4 w-4 text-green-500" />
                       GST Amount
                     </label>
                     {editingId === receipt.id ? (

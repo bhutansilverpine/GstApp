@@ -6,7 +6,7 @@ import {
   Filter,
   FileText,
   Calendar,
-  IndianRupee,
+  CircleDollarSign,
   Building2,
   Eye,
   Download,
@@ -216,7 +216,7 @@ export function ReceiptList({
                       onClick={() => toggleSort("amount")}
                     >
                       <div className="flex items-center gap-2">
-                        <IndianRupee className="h-4 w-4" />
+                        <CircleDollarSign className="h-4 w-4" />
                         Amount
                         {sortBy === "amount" && (
                           <span className="text-xs">
@@ -369,7 +369,7 @@ export function ReceiptList({
                   )}
                 </p>
               </div>
-              <IndianRupee className="h-8 w-8 text-primary opacity-50" />
+              <CircleDollarSign className="h-8 w-8 text-primary opacity-50" />
             </div>
           </CardContent>
         </Card>

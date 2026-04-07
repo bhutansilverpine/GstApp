@@ -4,7 +4,7 @@ import { useState } from "react"
 import {
   Search,
   ArrowLeftRight,
-  IndianRupee,
+  CircleDollarSign,
   Calendar,
   Building2,
   Tag,

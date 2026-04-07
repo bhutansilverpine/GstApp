@@ -169,7 +169,7 @@ export const receipts = pgTable(
     subtotal: decimal("subtotal", { precision: 15, scale: 2 }).default("0"),
     gstAmount: decimal("gst_amount", { precision: 15, scale: 2 }).default("0"),
     totalAmount: decimal("total_amount", { precision: 15, scale: 2 }).default("0"),
-    currency: varchar("currency", { length: 10 }).default("NZD"),
+    currency: varchar("currency", { length: 10 }).default("BTN"),
     category: varchar("category", { length: 255 }),
     description: text("description"),
     imageUrl: text("image_url"),

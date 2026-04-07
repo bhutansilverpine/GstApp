@@ -258,14 +258,14 @@ export function BankUpload({
           <h4 className="text-sm font-semibold mb-3">Supported Banks</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              "HDFC Bank",
-              "ICICI Bank",
-              "State Bank of India",
-              "Axis Bank",
-              "Kotak Mahindra",
-              "Punjab National Bank",
-              "Bank of Baroda",
-              "Union Bank",
+              "Bank of Bhutan (BOB)",
+              "Bhutan National Bank (BNB)",
+              "Druk P&L Bank",
+              "T-Bank",
+              "Bhutan Development Bank",
+              "Royal Insurance Corporation",
+              "Bhutan Insurance Limited",
+              "National Pension & Provident Fund",
             ].map((bank) => (
               <div
                 key={bank}
@@ -276,7 +276,7 @@ export function BankUpload({
             ))}
           </div>
           <p className="text-xs text-muted-foreground mt-3">
-            We support CSV, PDF, and Excel formats from all major Indian banks.
+            We support PDF formats from all major Bhutanese banks.
           </p>
         </CardContent>
       </Card>

@@ -1,9 +1,134 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { db, receipts } from "@/lib/db";
+import { db, receipts, accounts, organizations } from "@/lib/db";
 import { eq, and, desc } from "drizzle-orm";
 import type { UpdateReceiptInput, ApiResponse } from "@/types";
+
+// Helper function to get account for receipt category
+async function getAccountForCategory(category: string, organizationId: string) {
+  // Map common receipt categories to default expense accounts
+  // In a real system, these would be configurable per organization
+  const categoryAccountMap: Record<string, string> = {
+    "FUEL": "Fuel Expense",
+    "FOOD": "Meals & Entertainment",
+    "SHOPPING": "Office Supplies",
+    "UTILITY": "Utilities",
+    "TRAVEL": "Travel Expenses",
+    "MISC/PERSONAL": "Miscellaneous Expense",
+    "OTHER": "General Expense",
+  };
+
+  const accountName = categoryAccountMap[category] || "General Expense";
+
+  const accountResults = await db
+    .select()
+    .from(accounts)
+    .where(
+      and(
+        eq(accounts.organizationId, organizationId),
+        eq(accounts.name, accountName)
+      )
+    )
+    .limit(1);
+
+  return accountResults[0] || null;
+}
+
+// Helper function to get GST input tax account
+async function getGSTInputAccount(organizationId: string) {
+  const accountResults = await db
+    .select()
+    .from(accounts)
+    .where(
+      and(
+        eq(accounts.organizationId, organizationId),
+        eq(accounts.name, "GST Input Tax")
+      )
+    )
+    .limit(1);
+
+  return accountResults[0] || null;
+}
+
+// Helper function to get default accounts payable account
+async function getAccountsPayableAccount(organizationId: string) {
+  const accountResults = await db
+    .select()
+    .from(accounts)
+    .where(
+      and(
+        eq(accounts.organizationId, organizationId),
+        eq(accounts.name, "Accounts Payable")
+      )
+    )
+    .limit(1);
+
+  return accountResults[0] || null;
+}
+
+// Helper function to create journal entry for verified receipt
+async function createJournalEntryForReceipt(receipt: any, organizationId: string) {
+  try {
+    const expenseAccount = await getAccountForCategory(receipt.category || "OTHER", organizationId);
+    const gstAccount = await getGSTInputAccount(organizationId);
+    const payableAccount = await getAccountsPayableAccount(organizationId);
+
+    if (!expenseAccount || !payableAccount) {
+      console.log("Required accounts not found, skipping journal entry creation");
+      return null;
+    }
+
+    // Import the createTransaction function to avoid circular dependency
+    const { createTransaction: createJournalEntry } = await import("../transactions/create");
+
+    const totalAmount = Number(receipt.totalAmount || 0);
+    const gstAmount = Number(receipt.gstAmount || 0);
+    const subtotal = totalAmount - gstAmount;
+
+    // Create journal entry lines
+    const lines = [
+      {
+        accountId: expenseAccount.id,
+        debit: subtotal.toFixed(2),
+        credit: "0",
+        description: `${receipt.vendorName} - ${receipt.description || receipt.category}`,
+      },
+    ];
+
+    // Add GST line if applicable
+    if (gstAmount > 0 && gstAccount) {
+      lines.push({
+        accountId: gstAccount.id,
+        debit: gstAmount.toFixed(2),
+        credit: "0",
+        description: "GST Input Tax (7%)",
+      });
+    }
+
+    // Add credit line
+    lines.push({
+      accountId: payableAccount.id,
+      debit: "0",
+      credit: totalAmount.toFixed(2),
+      description: `Accounts Payable - ${receipt.vendorName}`,
+    });
+
+    // Create the transaction
+    const result = await createJournalEntry({
+      date: receipt.date ? new Date(receipt.date).toISOString() : new Date().toISOString(),
+      description: `Receipt: ${receipt.vendorName} - ${receipt.description || receipt.category}`,
+      reference: receipt.id, // Link to receipt
+      type: "purchase",
+      lines,
+    }, organizationId, "system");
+
+    return result;
+  } catch (error) {
+    console.error("Error creating journal entry for receipt:", error);
+    return null;
+  }
+}
 
 /**
  * Verify and update AI-extracted receipt data
@@ -82,9 +207,29 @@ export async function verifyReceipt(
 
     console.log(`Verified receipt: ${receiptId}`);
 
+    // Create journal entry for the verified receipt
+    const updatedReceipt = updatedReceipts[0];
+    try {
+      const journalEntryResult = await createJournalEntryForReceipt(updatedReceipt, organizationId);
+
+      if (journalEntryResult?.success && journalEntryResult.data?.transaction?.id) {
+        // Link receipt to transaction
+        await db
+          .update(receipts)
+          .set({ transactionId: journalEntryResult.data.transaction.id })
+          .where(eq(receipts.id, receiptId));
+
+        console.log(`Created journal entry ${journalEntryResult.data.transaction.id} for receipt ${receiptId}`);
+      }
+    } catch (journalError) {
+      console.error("Failed to create journal entry for receipt:", journalError);
+      // Don't fail the receipt verification if journal entry creation fails
+    }
+
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/receipts`);
-    revalidatePath(`/dashboard/${organizationId}/reconciliation`);
+    revalidatePath('/dashboard/receipts');
+    revalidatePath('/dashboard/transactions');
+    revalidatePath('/dashboard/reconcile');
 
     return {
       success: true,
@@ -166,7 +311,7 @@ export async function rejectReceipt(
     console.log(`Rejected receipt: ${receiptId} - Reason: ${reason}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/receipts`);
+    revalidatePath('/dashboard/receipts');
 
     return {
       success: true,
@@ -215,7 +360,7 @@ export async function flagReceipt(
     console.log(`Flagged receipt: ${receiptId} - Reason: ${flagReason}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/receipts`);
+    revalidatePath('/dashboard/receipts');
 
     return {
       success: true,
@@ -280,7 +425,7 @@ export async function deleteReceipt(
     console.log(`Deleted receipt: ${receiptId}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/receipts`);
+    revalidatePath('/dashboard/receipts');
 
     return {
       success: true,

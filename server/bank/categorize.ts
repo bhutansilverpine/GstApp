@@ -88,8 +88,8 @@ export async function autoCategorizeTransactions(
     );
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/bank`);
-    revalidatePath(`/dashboard/${organizationId}/reconciliation`);
+    revalidatePath('/dashboard/bank');
+    revalidatePath('/dashboard/reconcile');
 
     return {
       success: true,
@@ -140,8 +140,8 @@ export async function categorizeTransactionManual(
     console.log(`Categorized transaction ${transactionId} as ${categoryId}`);
 
     // Revalidate cache
-    revalidatePath(`/dashboard/${organizationId}/bank`);
-    revalidatePath(`/dashboard/${organizationId}/reconciliation`);
+    revalidatePath('/dashboard/bank');
+    revalidatePath('/dashboard/reconcile');
 
     return {
       success: true,

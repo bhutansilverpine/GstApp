@@ -7,7 +7,7 @@ import {
   ArrowUpDown,
   ArrowUpRight,
   ArrowDownLeft,
-  IndianRupee,
+  CircleDollarSign,
   Calendar,
   Tag,
   MoreVertical,
@@ -300,7 +300,7 @@ export function TransactionList({
                       onClick={() => toggleSort("amount")}
                     >
                       <div className="flex items-center gap-2">
-                        <IndianRupee className="h-4 w-4" />
+                        <CircleDollarSign className="h-4 w-4" />
                         Amount
                         {sortBy === "amount" && (
                           <ChevronDown

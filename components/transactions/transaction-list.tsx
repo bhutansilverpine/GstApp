@@ -6,7 +6,7 @@ import {
   Filter,
   ChevronDown,
   ChevronRight,
-  IndianRupee,
+  CircleDollarSign,
   Calendar,
   FileText,
   Eye,
@@ -210,7 +210,7 @@ export function TransactionList({
                 <p className="text-sm text-muted-foreground">Total Value</p>
                 <p className="text-2xl font-bold">{formatCurrency(totalValue)}</p>
               </div>
-              <IndianRupee className="h-8 w-8 text-primary opacity-50" />
+              <CircleDollarSign className="h-8 w-8 text-primary opacity-50" />
             </div>
           </CardContent>
         </Card>
