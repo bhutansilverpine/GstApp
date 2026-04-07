@@ -44,7 +44,7 @@ export function LoadingOverlay({
     >
       <div className="space-y-4 text-center">
         <div className="flex justify-center mb-4">
-          <Loader2 className={loaderSizes[variant]} className="text-primary animate-spin" />
+          <Loader2 className={cn(loaderSizes[variant], "text-primary animate-spin")} />
         </div>
         <div className="space-y-2">
           <p className="text-sm font-semibold text-gray-900 dark:text-white">

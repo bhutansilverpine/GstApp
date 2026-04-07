@@ -1,6 +1,6 @@
 import { MetricCard } from "@/components/dashboard/metric-card"
 import { GlassCard } from "@/components/dashboard/glass-card"
-import { PremiumCard, PremiumButton, PremiumDropdown } from "@/components/ui"
+import { PremiumCard, PremiumButton, PremiumDropdown, Button } from "@/components/ui"
 import { PremiumGlassCard } from "@/components/dashboard/premium-glass-card"
 import { Breadcrumb } from "@/components/dashboard/breadcrumb"
 import { WorkflowChecklist } from "@/components/dashboard/workflow-checklist"
@@ -41,21 +41,22 @@ function DashboardSkeleton() {
       {/* Stats grid skeleton */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <SkeletonCard key={i} />
+          <Skeleton key={i} />
         ))}
       </div>
 
       {/* Main content skeleton */}
       <div className="grid gap-6 lg:grid-cols-7">
         <div className="lg:col-span-4">
-          <SkeletonCard />
+          <Skeleton />
         </div>
         <div className="lg:col-span-3 space-y-6">
-          <SkeletonCard />
-          <SkeletonCard />
+          <Skeleton />
+          <Skeleton />
         </div>
       </div>
-    </div  )
+    </div>
+  )
 }
 
 export default async function PremiumDashboardPage() {
@@ -244,7 +245,7 @@ export default async function PremiumDashboardPage() {
         </PremiumGlassCard>
 
         {/* Right Sidebar - Premium components */}
-        <div className="lg:col-span-3 space-y-6" animate-in-up" style={{ animationDelay: "400ms" }}>
+        <div className="lg:col-span-3 space-y-6 animate-in-up" style={{ animationDelay: "400ms" }}>
           {/* Workflow Checklist */}
           <WorkflowChecklist />
 

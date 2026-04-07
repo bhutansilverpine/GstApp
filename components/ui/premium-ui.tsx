@@ -36,4 +36,3 @@ export const animations = {
   "card-clerk": "card-clerk-premium",
   "glass-card-premium": "glass-card-premium",
 } as const
-}

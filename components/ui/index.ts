@@ -27,3 +27,8 @@ export { Alert, AlertTitle, AlertDescription } from "./alert"
 // Toast Components
 export { ToastProvider, ToastViewport, Toast, ToastTitle, ToastDescription, ToastClose, ToastAction } from "./toast"
 export type { ToastProps, ToastActionElement } from "./toast"
+
+// Premium Components
+export { PremiumCard } from "./premium-card"
+export { PremiumButton } from "./premium-button"
+export { PremiumDropdown } from "./premium-dropdown"

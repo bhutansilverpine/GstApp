@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState, useCallback } from "react"
 import { useDropzone } from "react-dropzone"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -10,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Loader2, Upload, FileText, Check, AlertCircle, ArrowRight, ArrowLeft, ExternalLink } from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
+import { SheetSelector } from "./sheet-selector"
 
 interface ExtractedReceiptData {
   date: string
@@ -263,7 +265,7 @@ export function ReceiptUploadFlow({ organizationId, onComplete }: ReceiptUploadF
           {/* Preview Image */}
           {preview && (
             <div className="rounded-lg overflow-hidden border">
-              <img src={preview} alt="Receipt preview" className="max-h-48 w-full object-contain bg-muted" />
+              <Image src={preview} alt="Receipt preview" width={400} height={200} className="max-h-48 w-full object-contain bg-muted" />
             </div>
           )}
 

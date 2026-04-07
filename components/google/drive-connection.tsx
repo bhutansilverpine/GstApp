@@ -53,6 +53,7 @@ export function GoogleDriveConnection({ orgName, onConnect }: GoogleDriveConnect
     if (authLoaded) {
       checkDriveConnection()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authLoaded, orgName])
 
   const checkDriveConnection = async () => {

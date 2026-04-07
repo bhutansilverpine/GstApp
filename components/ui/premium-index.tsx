@@ -42,7 +42,6 @@ export const animations = {
   "badge-premium": "badge-premium",
   "dropdown-clerk": "dropdown-clerk",
 } as const
-}
 
 // Clerk-inspired color utilities
 export const clerkColors = {
