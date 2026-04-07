@@ -46,7 +46,7 @@ export function GoogleDriveConnection({ orgName, onConnect }: GoogleDriveConnect
 
   // Check if user signed in with Google
   const signInWithGoogle = user?.externalAccounts?.some(
-    (account) => account.provider === "google_oauth2"
+    (account) => account.provider === "google" as const
   )
 
   useEffect(() => {

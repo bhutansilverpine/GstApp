@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Building2, ChevronDown, Plus, Settings, Loader2 } from "lucide-react"
-import { useAuth, useOrganizationList, useUser } from "@clerk/nextjs"
+import { useOrganization, useOrganizationList, useUser } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -16,8 +16,8 @@ import {
 
 export function OrganizationSwitcher() {
   const { user } = useUser()
-  const { isLoaded, setActive, organizationList, userMemberships } = useOrganizationList()
-  const { organization } = useAuth()
+  const { isLoaded, setActive, userMemberships } = useOrganizationList()
+  const { organization } = useOrganization()
 
   if (!isLoaded) {
     return (

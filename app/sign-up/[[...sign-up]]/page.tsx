@@ -1,6 +1,7 @@
 import { SignUp } from "@clerk/nextjs";
 import Link from "next/link";
 import { ArrowRight, Shield, Sparkles, Zap, CheckCircle2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function SignUpPage() {
   return (

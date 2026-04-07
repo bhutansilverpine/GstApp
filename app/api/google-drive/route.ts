@@ -191,7 +191,7 @@ async function getDriveInfo(accessToken: string, orgName?: string) {
     const aboutData = await aboutResponse.json();
 
     // Check if Silverpine folder exists
-    const folder = await createSilverpineFolder(accessToken, orgName);
+    const folder = await createSilverpineFolder(accessToken, orgName || "SilverpineGST");
 
     return {
       connected: true,

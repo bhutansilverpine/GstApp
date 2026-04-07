@@ -1,11 +1,12 @@
 "use client"
 
+import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import { Eye, EyeOff } from "lucide-react"
 
-interface PremiumInputProps extends React.InputHTMLAttributes {
+interface PremiumInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string
   error?: string
   helper?: string
@@ -26,7 +27,7 @@ export function PremiumInput({
   type = "text",
   ...props
 }: PremiumInputProps) {
-  const [showPassword, setShowPassword] = showPasswordToggle ? [false] : []
+  const [showPassword, setShowPassword] = showPasswordToggle ? useState(false) : [false, () => false]
 
   const togglePassword = () => setShowPassword(!showPassword)
 

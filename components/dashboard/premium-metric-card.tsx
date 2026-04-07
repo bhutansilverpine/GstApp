@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { cn, formatCurrency } from "@/lib/utils"
-import { TrendingUp, TrendingDown, TrendingUp03, TrendingDown03 } from "lucide-react"
+import { TrendingUp, TrendingDown } from "lucide-react"
 import { LucideIcon } from "lucide-react"
 
 interface MetricCardProps {
@@ -33,7 +33,7 @@ export function MetricCard({
   const trendIcons = {
     up: TrendingUp,
     down: TrendingDown,
-    neutral: TrendingUp03,
+    neutral: TrendingUp,
   }
 
   const trendColors = {
@@ -51,7 +51,7 @@ export function MetricCard({
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/5">
-              <icon className="h-5 w-5 text-primary" />
+              {Icon && <Icon className="h-5 w-5 text-primary" />}
             </div>
             <div>
               <p className="text-sm font-medium text-gray-900 dark:text-white">{title}</p>

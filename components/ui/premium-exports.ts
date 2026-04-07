@@ -1,11 +1,10 @@
 // Export all premium Clerk-inspired UI components and utilities
 export { PremiumButton } from './premium-button'
 export { PremiumCard } from './premium-card'
-export { PremiumGlassCard } from './premium-glass-card'
+export { PremiumGlassCard } from '../dashboard/premium-glass-card'
 export { PremiumInput } from './premium-input'
 export { PremiumDropdown } from './premium-dropdown'
-export { PremiumHeader } from './dashboard/premium-header'
-export { PremiumMetricCard } from './dashboard/premium-metric-card'
+export { MetricCard as PremiumMetricCard } from '../dashboard/premium-metric-card'
 
 // Export all skeleton loading components
 export {
@@ -24,7 +23,7 @@ export {
 export { LoadingOverlay } from './premium-loading'
 
 // Export utility classes
-export { cn } from './utils'
+export { cn } from '@/lib/utils'
 
 // Export animations
 export const animations = {

@@ -1,7 +1,6 @@
 "use client"
 
-import { Card } from "@/components/ui/card"
-import { CardContent } from "@/components/ui/card-content"
+import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
 interface PremiumCardProps {

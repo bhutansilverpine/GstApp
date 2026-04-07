@@ -11,6 +11,7 @@ interface PremiumGlassCardProps {
   icon?: React.ReactNode
   actions?: React.ReactNode
   variant?: "default" | "premium" | "glass"
+  style?: React.CSSProperties
 }
 
 export function PremiumGlassCard({
@@ -21,6 +22,7 @@ export function PremiumGlassCard({
   actions,
   variant = "glass",
   className,
+  style,
 }: PremiumGlassCardProps) {
   const cardStyles = {
     default: "card-clerk",
@@ -29,7 +31,7 @@ export function PremiumGlassCard({
   }
 
   return (
-    <Card className={cn(cardStyles[variant], "animate-in-up", className)}>
+    <Card className={cn(cardStyles[variant], "animate-in-up", className)} style={style}>
       {(title || icon || actions) && (
         <CardHeader>
           <div className="flex items-center justify-between">

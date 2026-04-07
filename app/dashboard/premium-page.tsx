@@ -30,6 +30,8 @@ import { getReceiptsSummary } from "@/server/receipts/list"
 import { getBankTransactionsSummary } from "@/server/bank/list"
 import Link from "next/link"
 import { Skeleton } from "@/components/ui/skeleton"
+import { formatCurrency } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 
 // Skeleton loader for dashboard
 function DashboardSkeleton() {
@@ -75,13 +77,10 @@ export default async function PremiumDashboardPage() {
     getRecentTransactions(organizationId, 5),
     getReceiptsSummary(organizationId),
     getBankTransactionsSummary(organizationId),
-  ]).catch(() => ({
-    org: null,
-    stats: null,
-    recentTransactions: [],
-    receiptsSummary: null,
-    bankSummary: null,
-  }))
+  ]).catch((error) => {
+    console.error("Error fetching dashboard data:", error);
+    return [null, null, [], { success: false, data: null }, { success: false, data: null }] as const;
+  })
 
   if (!org && !organizationId) {
     return (
@@ -145,7 +144,6 @@ export default async function PremiumDashboardPage() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 animate-in-up" style={{ animationDelay: "100ms" }}>
         <MetricCard
           title="Total Cash Inflow"
-          valueNumber={totalInflow}
           value={`Nu. ${totalInflow.toLocaleString()}`}
           change={0}
           changeType="increase"
@@ -155,7 +153,6 @@ export default async function PremiumDashboardPage() {
         />
         <MetricCard
           title="Total Cash Outflow"
-          valueNumber={totalOutflow}
           value={`Nu. ${totalOutflow.toLocaleString()}`}
           change={0}
           changeType="decrease"
@@ -165,7 +162,6 @@ export default async function PremiumDashboardPage() {
         />
         <MetricCard
           title="GST Claimable"
-          valueNumber={gstClaimable}
           value={`Nu. ${gstClaimable.toLocaleString()}`}
           change={0}
           changeType="increase"
