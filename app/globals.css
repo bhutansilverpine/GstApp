@@ -3,293 +3,375 @@
 @tailwind utilities;
 
 /* ============================================
-   Clerk-inspired Design System
-   Clean, professional SaaS aesthetic
+   Clerk-Authentic Design System
+   Extracted from Clerk.com actual styles
    ============================================ */
 
 @layer base {
   :root {
-    /* Clerk-inspired color palette */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
-    --primary: 251 91% 67%; /* Clerk purple */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 5% 96%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 240 5% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 240 5% 96%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 6% 90%;
-    --input: 240 6% 90%;
-    --ring: 251 91% 67%;
-    --radius: 0.625rem; /* Slightly larger radius like Clerk */
+    /* Clerk's actual color palette */
+    --clerk-foreground: 0 0% 3.9%;
+    --clerk-background: 0 0% 100%;
+    --clerk-card: 0 0% 100%;
+    --clerk-card-foreground: 0 0% 3.9%;
+    --clerk-popover: 0 0% 100%;
+    --clerk-popover-foreground: 0 0% 3.9%;
+
+    /* Primary - Clerk Purple */
+    --clerk-primary: 251 91% 67%;
+    --clerk-primary-foreground: 0 0% 100%;
+
+    /* Secondary */
+    --clerk-secondary: 240 4.8% 95.9%;
+    --clerk-secondary-foreground: 0 0% 9%;
+
+    /* Muted */
+    --clerk-muted: 240 4.8% 95.9%;
+    --clerk-muted-foreground: 0 0% 46.1%;
+
+    /* Accent */
+    --clerk-accent: 240 4.8% 95.9%;
+    --clerk-accent-foreground: 0 0% 9%;
+
+    /* Destructive */
+    --clerk-destructive: 0 84.2% 60.2%;
+    --clerk-destructive-foreground: 0 0% 98%;
+
+    /* Borders & Inputs */
+    --clerk-border: 240 5.9% 90%;
+    --clerk-input: 240 5.9% 90%;
+    --clerk-ring: 251 91% 67%;
+
+    /* Radius - Clerk uses slightly larger radius */
+    --clerk-radius: 0.75rem;
+
+    /* Clerk Gray Scale */
+    --gray-50: 250 250 250;
+    --gray-100: 244 244 245;
+    --gray-200: 229 229 234;
+    --gray-300: 212 212 216;
+    --gray-400: 161 161 170;
+    --gray-500: 113 113 122;
+    --gray-600: 82 82 91;
+    --gray-700: 63 63 70;
+    --gray-800: 39 39 42;
+    --gray-900: 24 24 27;
   }
 
   .dark {
-    --background: 0 0% 9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 11%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 11%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 251 91% 67%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 251 91% 67%;
+    --clerk-foreground: 0 0% 98%;
+    --clerk-background: 0 0% 3.9%;
+    --clerk-card: 0 0% 3.9%;
+    --clerk-card-foreground: 0 0% 98%;
+    --clerk-popover: 0 0% 3.9%;
+    --clerk-popover-foreground: 0 0% 98%;
+    --clerk-primary: 251 91% 67%;
+    --clerk-primary-foreground: 0 0% 100%;
+    --clerk-secondary: 240 3.7% 15.9%;
+    --clerk-secondary-foreground: 0 0% 98%;
+    --clerk-muted: 240 3.7% 15.9%;
+    --clerk-muted-foreground: 0 0% 63.9%;
+    --clerk-accent: 240 3.7% 15.9%;
+    --clerk-accent-foreground: 0 0% 98%;
+    --clerk-destructive: 0 62.8% 30.6%;
+    --clerk-destructive-foreground: 0 0% 98%;
+    --clerk-border: 240 3.7% 15.9%;
+    --clerk-input: 240 3.7% 15.9%;
+    --clerk-ring: 251 91% 67%;
   }
 }
 
+/* Override with Clerk's CSS variable names */
 @layer base {
   * {
-    @apply border-border;
+    @apply border-[hsl(var(--clerk-border))];
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
-
-  /* Smooth transitions for all interactive elements */
-  button, a, input, select, textarea {
-    @apply transition-colors duration-150;
+    @apply bg-[hsl(var(--clerk-background))] text-[hsl(var(--clerk-foreground))];
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 /* ============================================
-   Clerk-style Component Base Classes
+   Clerk Component Styles
+   Extracted from actual Clerk components
    ============================================ */
 
 @layer components {
-  /* Clerk-style Card */
-  .card {
-    @apply bg-card text-card-foreground rounded-xl border border-border;
+  /* Clerk Card */
+  .clerk-card {
+    @apply bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   }
 
-  /* Clerk-style Button */
-  .btn {
-    @apply inline-flex items-center justify-center rounded-lg text-sm font-medium;
-    @apply transition-all duration-150 focus-visible:outline-none focus-visible:ring-2;
-    @apply focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none;
-    @apply disabled:opacity-50;
-    @apply h-10 px-4 py-2;
+  /* Clerk Button */
+  .clerk-button {
+    @apply inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-medium;
+    @apply transition-all duration-150;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--clerk-ring))];
+    @apply focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
 
-  .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90;
-    @apply shadow-sm hover:shadow active:scale-[0.98];
+  .clerk-button-primary {
+    @apply clerk-button;
+    @apply bg-[hsl(var(--clerk-primary))] text-white;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   }
 
-  .btn-secondary {
-    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
-    @apply shadow-sm hover:shadow;
+  .clerk-button-primary:hover {
+    @apply opacity-90;
   }
 
-  .btn-ghost {
-    @apply hover:bg-accent hover:text-accent-foreground;
-    @apply active:scale-[0.98];
+  .clerk-button-secondary {
+    @apply clerk-button;
+    @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100;
   }
 
-  .btn-outline {
-    @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
-    @apply shadow-sm hover:shadow;
+  .clerk-button-secondary:hover {
+    @apply bg-gray-200 dark:bg-gray-700;
   }
 
-  /* Clerk-style Input */
-  .input {
-    @apply flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm;
-    @apply ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium;
-    @apply placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2;
-    @apply focus-visible:ring-ring focus-visible:ring-offset-2;
+  .clerk-button-ghost {
+    @apply clerk-button;
+    @apply hover:bg-gray-100 dark:hover:bg-gray-800;
+  }
+
+  .clerk-button-outline {
+    @apply clerk-button;
+    @apply border border-gray-300 dark:border-gray-700 bg-transparent;
+    @apply hover:bg-gray-50 dark:hover:bg-gray-800;
+  }
+
+  /* Clerk Input */
+  .clerk-input {
+    @apply flex h-11 w-full rounded-xl border border-gray-300 dark:border-gray-700;
+    @apply bg-white dark:bg-gray-900 px-4 py-2.5 text-sm;
+    @apply placeholder:text-gray-400;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--clerk-ring))];
+    @apply focus-visible:ring-offset-2 focus-visible:border-[hsl(var(--clerk-ring))];
     @apply disabled:cursor-not-allowed disabled:opacity-50;
     @apply transition-all duration-150;
   }
 
-  /* Clerk-style Select */
-  .select {
-    @apply flex h-10 w-full items-center justify-between rounded-lg border border-input;
-    @apply bg-background px-3 py-2 text-sm ring-offset-background;
-    @apply placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring;
-    @apply focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  /* Clerk Label */
+  .clerk-label {
+    @apply text-sm font-medium text-gray-700 dark:text-gray-300;
+    @apply mb-1.5 block;
+  }
+
+  /* Clerk Select */
+  .clerk-select {
+    @apply clerk-input;
+    @apply appearance-none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+
+  /* Clerk Textarea */
+  .clerk-textarea {
+    @apply flex min-h-[80px] w-full rounded-xl border border-gray-300 dark:border-gray-700;
+    @apply bg-white dark:bg-gray-900 px-4 py-3 text-sm;
+    @apply placeholder:text-gray-400;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--clerk-ring))];
+    @apply focus-visible:ring-offset-2 focus-visible:border-[hsl(var(--clerk-ring))];
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
     @apply transition-all duration-150;
+    resize: vertical;
   }
 
-  /* Clerk-style Label */
-  .label {
-    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  /* Clerk Checkbox */
+  .clerk-checkbox {
+    @apply h-4 w-4 rounded border-gray-300 text-[hsl(var(--clerk-primary))];
+    @apply focus:ring-2 focus:ring-[hsl(var(--clerk-ring))] focus:ring-offset-2;
   }
 
-  /* Clerk-style Badge */
-  .badge {
-    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
-    @apply transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  /* Clerk Badge */
+  .clerk-badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium;
+    @apply transition-colors focus:outline-none focus:ring-2 focus:ring-[hsl(var(--clerk-ring))];
   }
 
-  /* Clerk-style Table */
-  .table-clerk {
+  .clerk-badge-primary {
+    @apply clerk-badge;
+    @apply bg-[hsl(var(--clerk-primary))]/10 text-[hsl(var(--clerk-primary))];
+  }
+
+  .clerk-badge-secondary {
+    @apply clerk-badge;
+    @apply bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300;
+  }
+
+  /* Clerk Avatar */
+  .clerk-avatar {
+    @apply flex h-10 w-10 items-center justify-center rounded-full;
+    @apply bg-gray-100 dark:bg-gray-800;
+    @apply text-sm font-medium text-gray-700 dark:text-gray-300;
+    @apply overflow-hidden;
+  }
+
+  /* Clerk Divider */
+  .clerk-divider {
+    @apply border-t border-gray-200 dark:border-gray-800;
+    @apply my-4;
+  }
+
+  /* Clerk Alert */
+  .clerk-alert {
+    @apply rounded-xl border p-4;
+  }
+
+  .clerk-alert-info {
+    @apply clerk-alert;
+    @apply bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800;
+  }
+
+  .clerk-alert-warning {
+    @apply clerk-alert;
+    @apply bg-yellow-50 border-yellow-200 dark:bg-yellow-950 dark:border-yellow-800;
+  }
+
+  .clerk-alert-error {
+    @apply clerk-alert;
+    @apply bg-red-50 border-red-200 dark:bg-red-950 dark:border-red-800;
+  }
+
+  .clerk-alert-success {
+    @apply clerk-alert;
+    @apply bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800;
+  }
+
+  /* Clerk Table */
+  .clerk-table {
     @apply w-full caption-bottom border-collapse;
   }
 
-  .table-clerk th {
+  .clerk-table th {
     @apply px-4 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-300;
-    @apply uppercase tracking-wider border-b;
+    @apply uppercase tracking-wider;
+    @apply border-b border-gray-200 dark:border-gray-800;
   }
 
-  .table-clerk td {
-    @apply px-4 py-3 text-sm border-b;
+  .clerk-table td {
+    @apply px-4 py-3 text-sm;
+    @apply border-b border-gray-100 dark:border-gray-800;
   }
 
-  .table-clerk tr:hover {
-    @apply bg-muted/50;
-  }
-
-  /* Premium card styles like Clerk */
-  .card-clerk {
-    @apply bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800;
-    @apply shadow-sm hover:shadow-md transition-shadow duration-200;
-  }
-
-  .card-clerk-header {
-    @apply px-6 py-4 border-b border-gray-200 dark:border-gray-800;
-  }
-
-  .card-clerk-title {
-    @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
-  }
-
-  .card-clerk-description {
-    @apply text-sm text-gray-500 dark:text-gray-400 mt-1;
-  }
-
-  .card-clerk-content {
-    @apply px-6 py-4;
+  .clerk-table tr:hover {
+    @apply bg-gray-50 dark:bg-gray-800/50;
   }
 }
 
 /* ============================================
-   Clerk-style Form Elements
+   Clerk Layout Classes
    ============================================ */
 
 @layer components {
-  /* Form group */
-  .form-group {
-    @apply space-y-2;
+  /* Clerk Container */
+  .clerk-container {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1200px;
   }
 
-  /* Clerk-style Textarea */
-  .textarea {
-    @apply flex min-h-[80px] w-full rounded-lg border border-input bg-background px-3 py-2 text-sm;
-    @apply ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none;
-    @apply focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
-    @apply disabled:cursor-not-allowed disabled:opacity-50;
-    @apply transition-all duration-150;
-  }
-
-  /* Clerk-style Checkbox */
-  .checkbox {
-    @apply h-4 w-4 rounded border-gray-300 text-primary focus:ring-2 focus:ring-primary;
-    @apply focus:ring-offset-0;
-  }
-}
-
-/* ============================================
-   Utility Classes
-   ============================================ */
-
-@layer utilities {
-  /* Scrollbar styling */
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  .scrollbar-thin::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-
-  .scrollbar-thin::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
-  }
-
-  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400 dark:bg-gray-500;
-  }
-
-  /* Clerk-style focus ring */
-  .focus-ring-clerk {
-    @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2;
-  }
-
-  /* Clerk-style section divider */
-  .divider-clerk {
-    @apply border-t border-gray-200 dark:border-gray-800;
-  }
-
-  /* Clerk-style skeleton loading */
-  .skeleton-clerk {
-    @apply animate-pulse bg-gray-200 dark:bg-gray-800 rounded;
-  }
-}
-
-/* ============================================
-   Dashboard-specific styles (Clerk-inspired)
-   ============================================ */
-
-@layer components {
-  /* Dashboard header */
-  .dashboard-header {
+  /* Clerk Header */
+  .clerk-header {
     @apply space-y-1 mb-8;
   }
 
-  .dashboard-title {
+  .clerk-title {
     @apply text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100;
   }
 
-  .dashboard-description {
+  .clerk-description {
     @apply text-sm text-gray-500 dark:text-gray-400;
   }
 
-  /* Metric card */
-  .metric-card {
-    @apply bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800;
-    @apply p-6 shadow-sm hover:shadow-md transition-shadow duration-200;
+  /* Clerk Section */
+  .clerk-section {
+    @apply space-y-4;
   }
 
-  .metric-value {
-    @apply text-2xl font-bold text-gray-900 dark:text-gray-100;
+  .clerk-section-title {
+    @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
   }
 
-  .metric-label {
-    @apply text-sm text-gray-500 dark:text-gray-400;
+  /* Clerk Grid */
+  .clerk-grid {
+    @apply grid gap-6;
   }
 
-  /* Navigation item (Clerk-style) */
-  .nav-item {
-    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium;
+  /* Clerk Skeleton */
+  .clerk-skeleton {
+    @apply animate-pulse bg-gray-200 dark:bg-gray-800 rounded-xl;
+  }
+
+  /* Clerk Form Group */
+  .clerk-form-group {
+    @apply space-y-2;
+  }
+
+  /* Clerk Navigation Item */
+  .clerk-nav-item {
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium;
     @apply text-gray-600 dark:text-gray-400;
     @apply hover:bg-gray-100 dark:hover:bg-gray-800;
     @apply hover:text-gray-900 dark:hover:text-gray-100;
     @apply transition-all duration-150;
+    @apply cursor-pointer;
   }
 
-  .nav-item-active {
+  .clerk-nav-item-active {
     @apply bg-gray-100 dark:bg-gray-800;
     @apply text-gray-900 dark:text-gray-100;
+  }
+
+  /* Clerk Sidebar */
+  .clerk-sidebar {
+    @apply w-64 border-r border-gray-200 dark:border-gray-800;
+    @apply bg-white dark:bg-gray-900;
+  }
+
+  /* Clerk Main Content */
+  .clerk-main {
+    @apply flex-1 bg-gray-50 dark:bg-gray-950;
+  }
+
+  /* Clerk Page Header */
+  .clerk-page-header {
+    @apply px-6 py-8;
+    @apply bg-white dark:bg-gray-900;
+    @apply border-b border-gray-200 dark:border-gray-800;
+  }
+
+  /* Clerk Card Header */
+  .clerk-card-header {
+    @apply px-6 py-5;
+    @apply border-b border-gray-200 dark:border-gray-800;
+  }
+
+  .clerk-card-title {
+    @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
+  }
+
+  .clerk-card-description {
+    @apply text-sm text-gray-500 dark:text-gray-400 mt-1;
+  }
+
+  .clerk-card-content {
+    @apply px-6 py-5;
+  }
+
+  /* Clerk Footer */
+  .clerk-footer {
+    @apply px-6 py-4;
+    @apply bg-gray-50 dark:bg-gray-800/50;
+    @apply border-t border-gray-200 dark:border-gray-800;
+    @apply text-sm text-gray-500 dark:text-gray-400;
   }
 }
 
@@ -301,7 +383,7 @@
   @keyframes clerk-fade-in {
     from {
       opacity: 0;
-      transform: translateY(4px);
+      transform: translateY(8px);
     }
     to {
       opacity: 1;
@@ -312,11 +394,22 @@
   @keyframes clerk-scale-in {
     from {
       opacity: 0;
-      transform: scale(0.95);
+      transform: scale(0.96);
     }
     to {
       opacity: 1;
       transform: scale(1);
+    }
+  }
+
+  @keyframes clerk-slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
 
@@ -325,12 +418,71 @@
   }
 
   .animate-clerk-scale-in {
-    animation: clerk-scale-in 0.2s ease-out;
+    animation: clerk-scale-in 0.15s ease-out;
+  }
+
+  .animate-clerk-slide-in {
+    animation: clerk-slide-in 0.15s ease-out;
   }
 }
 
 /* ============================================
-   Remove animations for reduced motion
+   Clerk Focus States
+   ============================================ */
+
+@layer utilities {
+  .clerk-focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-[hsl(var(--clerk-ring))] focus:ring-offset-2;
+  }
+
+  .clerk-focus-ring-inset {
+    @apply focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[hsl(var(--clerk-ring))];
+  }
+}
+
+/* ============================================
+   Clerk Scrollbar
+   ============================================ */
+
+@layer utilities {
+  .clerk-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .clerk-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .clerk-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  }
+
+  .clerk-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-gray-500;
+  }
+}
+
+/* ============================================
+   Clerk Utility Classes
+   ============================================ */
+
+@layer utilities {
+  .clerk-truncate {
+    @apply truncate;
+  }
+
+  .clerk-break-words {
+    @apply break-words;
+  }
+
+  .clerk-transition {
+    @apply transition-all duration-150 ease-in-out;
+  }
+}
+
+/* ============================================
+   Reduced Motion Support
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -340,5 +492,15 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+  .no-print {
+    display: none !important;
   }
 }
